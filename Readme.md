@@ -20,8 +20,8 @@ SahAi is a community welfare website designed to connect individuals in need wit
 ## Installation
 1. **Clone the repository**:
    ```sh
-   git clone https://github.com/yourusername/sahai-project.git
-   cd sahai-project
+   git clone https://github.com/Manushya-a/SahAI.git
+   cd SahAI
    ```
 2. **Install dependencies**:
    ```sh
@@ -45,9 +45,6 @@ Contributions are welcome! Follow these steps:
 3. Commit your changes (`git commit -m "Added new feature"`).
 4. Push to your branch (`git push origin feature-name`).
 5. Open a pull request.
-
-## License
-This project is licensed under the **MIT License**.
 
 ## Contact
 For any issues or suggestions, please reach out to **your_email@example.com**.
