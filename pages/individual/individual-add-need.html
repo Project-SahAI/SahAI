@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Community Need - SahAI</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f4f7f9;
+      font-family: 'Arial', sans-serif;
+    }
+    .need-form {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 30px;
+      margin-top: 50px;
+    }
+    .form-header {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #4ea685;
+    }
+    .form-control:focus {
+      border-color: #4ea685;
+      box-shadow: 0 0 0 0.2rem rgba(78,166,133,0.25);
+    }
+    .btn-primary {
+      background-color: #4ea685;
+      border-color: #4ea685;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #3b8d6a;
+    }
+    .required-label::after {
+      content: " *";
+      color: red;
+    }
+    .urgency-level {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+    .urgency-level .btn {
+      flex-grow: 1;
+      margin: 0 5px;
+      opacity: 0.5;
+    }
+    .urgency-level .btn.active {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 need-form">
+        <h2 class="form-header">Submit Community Need</h2>
+        <form id="communityNeedForm" novalidate>
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label class="form-label required-label">Need Title</label>
+              <input type="text" class="form-control" id="needTitle" required>
+              <div class="invalid-feedback">Please provide a title for the need</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label class="form-label required-label">Detailed Description</label>
+              <textarea class="form-control" id="needDescription" rows="4" required></textarea>
+              <div class="invalid-feedback">Please provide a detailed description</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label required-label">Location</label>
+              <input type="text" class="form-control" id="needLocation" required>
+              <div class="invalid-feedback">Please specify the location</div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label required-label">Need Category</label>
+              <select class="form-control" id="needCategory" required>
+                <option value="">Select Category</option>
+                <option>Education</option>
+                <option>Healthcare</option>
+                <option>Infrastructure</option>
+                <option>Food Security</option>
+                <option>Other</option>
+              </select>
+              <div class="invalid-feedback">Please select a category</div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <label class="form-label required-label">Urgency Level</label>
+              <div class="urgency-level">
+                <button type="button" class="btn btn-outline-success" data-urgency="low">Low</button>
+                <button type="button" class="btn btn-outline-warning" data-urgency="medium">Medium</button>
+                <button type="button" class="btn btn-outline-danger" data-urgency="high">High</button>
+              </div>
+              <input type="hidden" id="urgencyLevel" required>
+              <div class="invalid-feedback">Please select an urgency level</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label class="form-label">Additional Context (Optional)</label>
+              <textarea class="form-control" id="additionalContext" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary w-100">Submit Need</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('communityNeedForm');
+      const urgencyButtons = document.querySelectorAll('.urgency-level .btn');
+      const urgencyInput = document.getElementById('urgencyLevel');
+      
+      // Urgency Level Selection
+      urgencyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          urgencyButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          urgencyInput.value = this.dataset.urgency;
+          urgencyInput.dispatchEvent(new Event('change'));
+        });
+      });
+      
+      // Form Validation
+      form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        
+        form.classList.add('was-validated');
+      }, false);
+
+      // Custom validation for urgency
+      urgencyInput.addEventListener('change', function() {
+        if (this.value) {
+          this.setCustomValidity('');
+        } else {
+          this.setCustomValidity('Please select an urgency level');
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

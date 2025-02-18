@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  width: 400px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-container input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.form-container button {
+  background: #4ea685;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 16px;
+}
+
+.form-container button:hover {
+  background: #3b8d6a;
+}
+
+.toggle-link {
+  text-align: center;
+  margin-top: 10px;
+  color: #4ea685;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.toggle-link a {
+  color: #4ea685;
+  text-decoration: none;
+}
+
+.toggle-link a:hover {
+  text-decoration: underline;
+}
+
+.container.sign-up-mode .left-panel {
+  transform: translateX(100%);
+}
+
+.container.sign-up-mode .right-panel {
+  transform: translateX(-100%);
+}
+
+.container.sign-up-mode .form-container {
+  transform: translateX(-100%);
+} 

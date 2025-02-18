@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Opportunity - SahAI</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f4f7f9;
+      font-family: 'Arial', sans-serif;
+    }
+    .opportunity-form {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 30px;
+      margin-top: 50px;
+    }
+    .form-header {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #0ea2bd;
+    }
+    .form-control:focus {
+      border-color: #0ea2bd;
+      box-shadow: 0 0 0 0.2rem rgba(14,162,189,0.25);
+    }
+    .btn-primary {
+      background-color: #0ea2bd;
+      border-color: #0ea2bd;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #0c8ba6;
+    }
+    .required-label::after {
+      content: " *";
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 opportunity-form">
+        <h2 class="form-header">Create New Opportunity</h2>
+        <form id="opportunityForm" novalidate>
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label class="form-label required-label">Opportunity Title</label>
+              <input type="text" class="form-control" id="opportunityTitle" required>
+              <div class="invalid-feedback">Please provide an opportunity title</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label class="form-label required-label">Description</label>
+              <textarea class="form-control" id="opportunityDescription" rows="4" required></textarea>
+              <div class="invalid-feedback">Please provide a description</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label required-label">Location</label>
+              <input type="text" class="form-control" id="opportunityLocation" required>
+              <div class="invalid-feedback">Please specify the location</div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label required-label">Required Volunteers</label>
+              <input type="number" class="form-control" id="volunteerCount" min="1" required>
+              <div class="invalid-feedback">Please enter number of volunteers needed</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label required-label">Skills Required</label>
+              <select multiple class="form-control" id="requiredSkills" required>
+                <option>Teaching</option>
+                <option>Medical</option>
+                <option>Construction</option>
+                <option>Environmental</option>
+                <option>Technology</option>
+                <option>Community Development</option>
+              </select>
+              <div class="invalid-feedback">Please select at least one skill</div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label required-label">Start Date</label>
+              <input type="date" class="form-control" id="startDate" required>
+              <div class="invalid-feedback">Please select a start date</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label class="form-label">Additional Notes (Optional)</label>
+              <textarea class="form-control" id="additionalNotes" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary w-100">Post Opportunity</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('opportunityForm');
+      
+      form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        
+        form.classList.add('was-validated');
+      }, false);
+
+      // Custom validation for skills
+      const skillsSelect = document.getElementById('requiredSkills');
+      skillsSelect.addEventListener('change', function() {
+        if (this.selectedOptions.length > 0) {
+          this.setCustomValidity('');
+        } else {
+          this.setCustomValidity('Please select at least one skill');
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

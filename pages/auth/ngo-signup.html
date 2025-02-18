@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NGO Sign Up</title>
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/css/auth.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <form id="ngoSignupForm">
+        <h2>NGO Sign Up</h2>
+        <input type="text" id="ngoName" placeholder="NGO Name" required>
+        <input type="text" id="ngoRegistrationNumber" placeholder="NGO Registration Number" required>
+        <input type="email" id="ngoEmail" placeholder="Official Email" required>
+        <input type="phone" id="ngoPhone" placeholder="Contact Number" required>
+        <input type="password" id="ngoPassword" placeholder="Password" required>
+        <input type="password" id="ngoConfirmPassword" placeholder="Confirm Password" required>
+        <button type="submit" class="btn btn-primary w-100">Create NGO Account</button>
+        <span class="toggle-link">Already have an account? <a href="/index.html">Sign In</a></span>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('ngoSignupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Simply redirect to dashboard
+      localStorage.setItem('ngoName', document.getElementById('ngoName').value || 'Sample NGO Name');
+      window.location.href = 'ngo-dashboard.html';
+    });
+  </script>
+
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

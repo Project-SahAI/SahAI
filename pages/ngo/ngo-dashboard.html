@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SahAI - NGO Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+      :root {
+        --primary-color: #0ea2bd;
+        --secondary-color: #4ea685;
+        --background-light: #f4f7f6;
+        --text-dark: #2d4356;
+        --card-bg: #ffffff;
+        --card-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+
+      body {
+        font-family: 'Inter', 'Poppins', sans-serif;
+        background-color: var(--background-light);
+        color: var(--text-dark);
+      }
+
+      .dashboard-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .welcome-section {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: var(--card-shadow);
+      }
+
+      .dashboard-card {
+        background: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: var(--card-shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 30px;
+      }
+
+      .dashboard-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      }
+
+      .card-header {
+        background: transparent;
+        border-bottom: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .profile-dropdown img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .stats-card {
+        text-align: center;
+        padding: 20px;
+      }
+
+      .stats-card .icon {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+      }
+
+      .quick-actions .btn {
+        margin: 10px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .quick-actions .btn i {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      .opportunity-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid #f1f1f1;
+      }
+
+      .opportunity-item:last-child {
+        border-bottom: none;
+      }
+
+      .volunteer-item img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+      }
+
+      .event-item .event-date {
+        background-color: #f1f3f5;
+        border-radius: 8px;
+        padding: 10px;
+        min-width: 60px;
+        text-align: center;
+      }
+
+      .impact-story {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+
+      @media (max-width: 768px) {
+        .dashboard-container {
+          padding: 10px;
+        }
+
+        .dashboard-card {
+          margin-bottom: 15px;
+        }
+      }
+
+      /* Theme Toggle Styles */
+      .theme-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .theme-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: var(--primary-color);
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+
+      /* Dark Theme Styles */
+      body.dark-theme {
+        background-color: #121212;
+        color: #ffffff;
+      }
+
+      body.dark-theme .dashboard-container,
+      body.dark-theme .dashboard-card {
+        background-color: #1e1e1e;
+        color: #ffffff;
+      }
+
+      body.dark-theme .welcome-section {
+        background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+        color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      body.dark-theme .opportunity-item,
+      body.dark-theme .volunteer-item,
+      body.dark-theme .event-item,
+      body.dark-theme .impact-story {
+        background-color: #2a2a2a;
+        border-color: #333;
+        color: #ffffff;
+      }
+
+      body.dark-theme .stats-card {
+        background-color: #2a2a2a;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      body.dark-theme .quick-actions .btn {
+        background-color: #333;
+        color: #ffffff;
+        border-color: #444;
+      }
+
+      body.dark-theme .quick-actions .btn:hover {
+        background-color: #444;
+        color: #ffffff;
+      }
+
+      /* Update event date styles for dark theme */
+      body.dark-theme .event-date {
+        background-color: #333;
+        color: #ffffff;
+      }
+
+      body.dark-theme .event-date strong {
+        color: var(--primary-color);
+      }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1>NGO Dashboard</h1>
+            <div class="d-flex align-items-center">
+                <!-- Theme Toggle -->
+                <label class="theme-switch me-3" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" title="Toggle theme">
+                    <span class="slider"></span>
+                </label>
+
+                <div class="profile-dropdown dropdown">
+                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                        <img src="/assets/img/profile image.png" alt="Profile">
+                        <span id="ngo-name" class="ms-2">NGO Name</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/pages/ngo/ngo-profile.html">My Profile</a></li>
+                        <li><a class="dropdown-item" href="/pages/community/community-needs.html">Community Needs</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/index.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h2>Welcome Back, <span id="welcome-name">NGO Partner</span>!</h2>
+            <p>You're making a difference, one project at a time.</p>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="row">
+            <!-- Quick Stats -->
+            <div class="col-md-4">
+                <div class="dashboard-card stats-card">
+                    <div class="card-body">
+                        <div class="icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h4>Active Projects</h4>
+                        <h2>12</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-card stats-card">
+                    <div class="card-body">
+                        <div class="icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Volunteers</h4>
+                        <h2>85</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-card stats-card">
+                    <div class="card-body">
+                        <div class="icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Impact Reach</h4>
+                        <h2>5K+</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opportunities Section -->
+            <div class="col-md-8">
+                <div class="dashboard-card opportunities-section">
+                    <div class="card-header">
+                        <h3>Recent Opportunities</h3>
+                        <a href="/pages/ngo/ngo-add-opportunity.html" class="btn btn-sm btn-outline-primary">Add New</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="opportunity-item">
+                            <div>
+                                <h5>Rural Education Support</h5>
+                                <small>Ongoing Project in Maharashtra</small>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-primary">View Details</a>
+                        </div>
+                        <div class="opportunity-item">
+                            <div>
+                                <h5>Healthcare Awareness Camp</h5>
+                                <small>Upcoming Event in Delhi</small>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-primary">Manage</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="col-md-4">
+                <div class="dashboard-card quick-actions">
+                    <div class="card-header">
+                        <h3>Quick Actions</h3>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <a href="/pages/ngo/ngo-add-opportunity.html" class="btn btn-outline-primary">
+                            <i class="fas fa-plus-circle"></i>
+                            Add Opportunity
+                        </a>
+                        <a href="/pages/community/community-needs.html" class="btn btn-outline-secondary">
+                            <i class="fas fa-globe"></i>
+                            View Community Needs
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Sections -->
+        <div class="row mt-4">
+            <!-- Volunteer Management -->
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Volunteer Management</h3>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Manage</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="volunteer-item d-flex align-items-center mb-3">
+                            <img src="/assets/img/volunteer-1.jpg" alt="Volunteer" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                            <div>
+                                <h5>John Doe</h5>
+                                <small>Active in 3 Projects</small>
+                            </div>
+                        </div>
+                        <div class="volunteer-item d-flex align-items-center mb-3">
+                            <img src="/assets/img/volunteer-2.jpg" alt="Volunteer" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                            <div>
+                                <h5>Jane Smith</h5>
+                                <small>Recent Contributor</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Events -->
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Upcoming Events</h3>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Calendar</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="event-item d-flex align-items-center mb-3">
+                            <div class="event-date me-3">
+                                <div class="text-center">
+                                    <strong class="d-block">15</strong>
+                                    <small>Feb</small>
+                                </div>
+                            </div>
+                            <div>
+                                <h5>Medical Camp</h5>
+                                <small>Rural Health Center</small>
+                            </div>
+                        </div>
+                        <div class="event-item d-flex align-items-center">
+                            <div class="event-date me-3">
+                                <div class="text-center">
+                                    <strong class="d-block">22</strong>
+                                    <small>Mar</small>
+                                </div>
+                            </div>
+                            <div>
+                                <h5>Education Fundraiser</h5>
+                                <small>Community Center</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Impact Stories -->
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Impact Stories</h3>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Share Story</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="impact-story mb-3">
+                            <h5>School Renovation Project</h5>
+                            <p>Transformed learning environment for 200 students</p>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">Read More</a>
+                        </div>
+                        <div class="impact-story">
+                            <h5>Healthcare Outreach</h5>
+                            <p>Provided medical support to 500 individuals</p>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Dashboard JS -->
+    <script src="/assets/js/ngo-dashboard.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve NGO name from localStorage
+        const ngoName = localStorage.getItem('ngoName') || 'NGO Partner';
+        
+        // Update profile name
+        document.getElementById('ngo-name').textContent = ngoName;
+        document.getElementById('welcome-name').textContent = ngoName;
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        
+        // Set initial theme
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+        themeToggle.checked = savedTheme === 'dark';
+
+        // Theme toggle event listener
+        themeToggle.addEventListener('change', function() {
+            const newTheme = this.checked ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            document.body.classList.toggle('dark-theme', newTheme === 'dark');
+            
+            // Save theme preference
+            localStorage.setItem('theme', newTheme);
+        });
+      });
+    </script>
+</body>
+</html> 

@@ -9,6 +9,48 @@
 (function() {
   "use strict";
 
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS with updated settings
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false,
+      disable: 'mobile'
+    });
+
+    // Hide preloader
+    const preloader = document.querySelector('#preloader');
+    if (preloader) {
+      window.addEventListener('load', function() {
+        preloader.classList.add('hide');
+        setTimeout(function() {
+          preloader.remove();
+        }, 300);
+      });
+    }
+
+    // Fix scrolling issues
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const headerOffset = 100;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    initThemeToggle(); // Initialize the theme toggle
+  });
+
   /**
    * Apply .scrolled class to the body as the page is scrolled down
    */
@@ -59,16 +101,6 @@
   });
 
   /**
-   * Preloader
-   */
-  const preloader = document.querySelector('#preloader');
-  if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove();
-    });
-  }
-
-  /**
    * Scroll top button
    */
   let scrollTop = document.querySelector('.scroll-top');
@@ -94,7 +126,7 @@
    */
   function aosInit() {
     AOS.init({
-      duration: 600,
+      duration: 1000,
       easing: 'ease-in-out',
       once: true,
       mirror: false
@@ -169,11 +201,40 @@
   /**
    * Frequently Asked Questions Toggle
    */
-  document.querySelectorAll('.faq-item h3, .faq-item .faq-toggle').forEach((faqItem) => {
-    faqItem.addEventListener('click', () => {
-      faqItem.parentNode.classList.toggle('faq-active');
+  function initFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const trigger = item.querySelector('h3');
+      const icon = item.querySelector('.faq-toggle');
+      const content = item.querySelector('.faq-content');
+      
+      // Function to toggle FAQ item
+      const toggleFAQ = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isActive = item.classList.contains('active');
+        
+        // Close all FAQ items
+        faqItems.forEach(faqItem => {
+          faqItem.classList.remove('active');
+        });
+        
+        // Open clicked item if it wasn't active
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      };
+
+      // Add click listeners to both heading and icon
+      trigger.addEventListener('click', toggleFAQ);
+      icon.addEventListener('click', toggleFAQ);
     });
-  });
+  }
+
+  // Initialize FAQ when document is ready
+  document.addEventListener('DOMContentLoaded', initFAQ);
 
   /**
    * Correct scrolling position upon page load for URLs containing hash links.
@@ -214,5 +275,106 @@
   }
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
+
+  function initTestimonialSlider() {
+    const container = document.querySelector('.testimonial-container');
+    if (!container) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    // Mouse events
+    container.addEventListener('mousedown', (e) => {
+      isDown = true;
+      container.style.cursor = 'grabbing';
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      isDown = false;
+      container.style.cursor = 'grab';
+    });
+
+    container.addEventListener('mouseup', () => {
+      isDown = false;
+      container.style.cursor = 'grab';
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 2;
+      container.scrollLeft = scrollLeft - walk;
+    });
+
+    // Touch events
+    container.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener('touchmove', (e) => {
+      if (!startX) return;
+      const x = e.touches[0].pageX - container.offsetLeft;
+      const walk = (x - startX) * 2;
+      container.scrollLeft = scrollLeft - walk;
+    });
+  }
+
+  // Initialize when document is ready
+  document.addEventListener('DOMContentLoaded', initTestimonialSlider);
+
+  // Theme Toggle Functionality
+  function initThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (!themeToggle) return;
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    themeToggle.checked = savedTheme === 'dark';
+
+    themeToggle.addEventListener('change', function() {
+      const newTheme = themeToggle.checked ? 'dark' : 'light';
+      setTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  }
+
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.body.classList.toggle('dark-theme', theme === 'dark');
+    document.body.classList.toggle('light-theme', theme === 'light');
+  }
+
+  document.addEventListener('DOMContentLoaded', initThemeToggle);
+
+  // Enhanced scroll animations
+  function initScrollAnimations() {
+    const elements = document.querySelectorAll('.service-item, .testimonial-item, .member');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    elements.forEach(element => {
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(20px)';
+      observer.observe(element);
+    });
+  }
+
+  // Initialize new features
+  document.addEventListener('DOMContentLoaded', () => {
+    initThemeToggle();
+    initScrollAnimations();
+  });
 
 })();

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to SahAI NGO Portal</title>
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/css/auth.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f7f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      transition: background-color 0.3s ease;
+    }
+    .welcome-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .welcome-container h1 {
+      color: #0ea2bd;
+      margin-bottom: 20px;
+    }
+    .welcome-container p {
+      color: #6c757d;
+      margin-bottom: 30px;
+    }
+    .btn-dashboard {
+      background-color: #4ea685;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .btn-dashboard:hover {
+      background-color: #3b8d6a;
+      color: white;
+    }
+
+    /* Dark Theme Styles */
+    body.dark-theme {
+      background-color: #121212;
+    }
+    body.dark-theme .welcome-container {
+      background-color: #1e1e1e;
+      color: #ffffff;
+    }
+    body.dark-theme .welcome-container h1 {
+      color: #0ea2bd;
+    }
+    body.dark-theme .welcome-container p {
+      color: #cccccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome-container">
+    <h1>Welcome to SahAI NGO Portal</h1>
+    <p id="ngo-welcome-message">Welcome, [NGO Name]! You're now part of our mission to create positive change.</p>
+    
+    <div class="actions">
+      <a href="/pages/ngo/ngo-dashboard.html" class="btn btn-dashboard">
+        Go to Dashboard <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Retrieve NGO name from localStorage
+      const ngoName = localStorage.getItem('ngoName') || 'NGO Partner';
+      
+      // Update welcome message
+      const welcomeMessage = document.getElementById('ngo-welcome-message');
+      welcomeMessage.textContent = `Welcome, ${ngoName}! You're now part of our mission to create positive change.`;
+
+      // Set theme based on localStorage
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+    });
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</body>
+</html> 

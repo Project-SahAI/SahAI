@@ -36,129 +36,133 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
+  <style>
+    body {
+      background-color: #f4f7f6;
+      font-family: 'Poppins', sans-serif;
+      color: #2d4356;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    body.dark-theme {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    .faq-section {
+      margin: 50px auto;
+      max-width: 800px;
+    }
+    .faq-title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #0ea2bd;
+    }
+    .faq-item {
+      margin-bottom: 10px;
+    }
+    .faq-question {
+      background-color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      font-weight: bold;
+      color: #0ea2bd;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+    }
+    body.dark-theme .faq-question {
+      background-color: #1e1e1e;
+      color: #0ea2bd;
+    }
+    .faq-answer {
+      background-color: #f8f9fa;
+      border-radius: 5px;
+      padding: 15px;
+      margin-top: 5px;
+    }
+    body.dark-theme .faq-answer {
+      background-color: #2a2a2a;
+      color: #b0b0b0;
+    }
+  </style>
 
 </head>
 
 <body class="index-page">
 
   <header id="header" class="header fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1 class="sitename m-0">SahAI</h1>
+      </a>
 
-    <div class="topbar d-flex align-items-center">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 5589 55488 55</span></i>
-        </div>
-        <div class="social-links d-none d-md-flex align-items-center">
-          <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-        </div>
-      </div>
-    </div><!-- End Top Bar -->
-
-    <div class="branding d-flex align-items-cente">
-
-      <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.png" alt=""> -->
-          <h1 class="sitename">SahAI</h1>
-          <span>.</span>
-        </a>
-
-        <nav id="navmenu" class="navmenu">
-          <ul>
-            <li><a href="#hero" class="active">Home<br></a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="blog.html">Our Stories</a></li>
-            <li class="dropdown"><a href="#"><span>Resources</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="projects.html">Programs</a></li>
-                <li class="dropdown"><a href="#"><span>Volunteer</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                  <ul>
-                    <li><a href="#">Sign Up</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Opportunities</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">More Resources</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Support</a></li>
-
-              </ul>
-            </li>
-            <li><a href="#contact">Contact</a></li>
-            <!-- Fancy Login/Signup Button -->
-            <button class="btn-fancy" data-bs-toggle="modal" data-bs-target="#authModal">Login</button>
-          </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
-
-      </div>
-
+      <nav id="navmenu" class="navmenu">
+        <ul class="d-flex align-items-center m-0">
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li class="ms-3">
+            <label class="theme-switch" for="theme-toggle">
+              <input type="checkbox" id="theme-toggle" aria-label="Toggle theme">
+              <span class="slider"></span>
+            </label>
+          </li>
+          <li class="ms-3">
+            <button type="button" class="btn-fancy" data-bs-toggle="modal" data-bs-target="#authModal">
+              <span>Individual</span> | <span>NGO</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
     </div>
-
   </header>
 
   <!-- Login/Signup Modal -->
   <div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title">Login</h5>
-          <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">Login / Sign Up</h5>
+          <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <!-- Tabs -->
-          <ul class="nav nav-tabs" id="authTab" role="tablist">
+          <ul class="nav nav-tabs justify-content-center" id="authTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="individual-login-tab" data-bs-toggle="tab" data-bs-target="#individual-login" type="button" role="tab">Individual</button>
+              <button class="nav-link active" id="individual-tab" data-bs-toggle="tab" data-bs-target="#individual" type="button" role="tab">Individual</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="ngo-login-tab" data-bs-toggle="tab" data-bs-target="#ngo-login" type="button" role="tab">NGO</button>
+              <button class="nav-link" id="ngo-tab" data-bs-toggle="tab" data-bs-target="#ngo" type="button" role="tab">NGO</button>
             </li>
           </ul>
 
           <!-- Tab Content -->
-          <div class="tab-content mt-3">
-            <!-- Individual Login -->
-            <div class="tab-pane fade show active" id="individual-login" role="tabpanel">
-              <form>
-                <div class="mb-3">
-                  <label class="form-label">Email</label>
-                  <input type="email" class="form-control" placeholder="Enter your email" required>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Password</label>
-                  <input type="password" class="form-control" placeholder="Enter your password" required>
-                </div>
-                <button class="btn btn-primary w-100">Login</button>
+          <div class="tab-content mt-4">
+            <!-- Individual Login/Signup -->
+            <div class="tab-pane fade show active" id="individual" role="tabpanel">
+              <form id="individualLoginForm">
+                <h2>Individual Login</h2>
+                <input type="email" class="form-control mb-3" id="individualEmail" placeholder="Email" required>
+                <input type="password" class="form-control mb-3" id="individualPassword" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary w-100 mb-2">Login</button>
+                <span class="toggle-link">Don't have an account? <a href="/pages/auth/individual-signup.html" >Sign Up</a></span>
               </form>
             </div>
 
-            <!-- NGO Login -->
-            <div class="tab-pane fade" id="ngo-login" role="tabpanel">
-              <form>
-                <div class="mb-3">
-                  <label class="form-label">Email</label>
-                  <input type="email" class="form-control" placeholder="Enter your email" required>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Password</label>
-                  <input type="password" class="form-control" placeholder="Enter your password" required>
-                </div>
-                <button class="btn btn-primary w-100">Login</button>
+            <!-- NGO Login/Signup -->
+            <div class="tab-pane fade" id="ngo" role="tabpanel">
+              <form id="ngoLoginForm">
+                <h2>NGO Login</h2>
+                <input type="text" class="form-control mb-3" id="ngoRegistrationNumber" placeholder="NGO Registration Number" required>
+                <input type="email" class="form-control mb-3" id="ngoEmail" placeholder="Official Email" required>
+                <input type="password" class="form-control mb-3" id="ngoPassword" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary w-100 mb-2">Login</button>
+                <span class="toggle-link">Don't have an account? <a href="/pages/auth/ngo-signup.html">Sign Up</a></span>
               </form>
             </div>
-          </div>
-
-          <!-- Text Below -->
-          <div class="text-signup">
-            <p>Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a></p>
           </div>
         </div>
       </div>
@@ -218,61 +222,23 @@
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section accent-background">
-
-      <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-5 justify-content-between">
-          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h2><span>Welcome to </span><span class="accent">SahAI</span></h2>
-            <p>Bridging hearts and hands to build stronger communities, one act of kindness at a time.</p>
-            <div class="d-flex">
-              <a href="#about" class="btn-get-started">Get Started</a>
-              <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+    <section id="hero" class="hero section">
+      <div class="container position-relative">
+        <div class="row gy-5 justify-content-between align-items-center">
+          <div class="col-lg-6 order-2 order-lg-1">
+            <h2>Empowering Communities Through <span class="accent">Technology</span></h2>
+            <p class="lead mb-4">Connecting volunteers, NGOs, and communities to create meaningful impact through innovative solutions.</p>
+            <div class="d-flex gap-3">
+              <a href="#about" class="btn-fancy">Get Started</a>
+              <a href="#" class="btn btn-outline-primary rounded-pill px-4">Learn More</a>
             </div>
           </div>
           <div class="col-lg-5 order-1 order-lg-2">
-            <img src="assets/img/hero-img.svg" class="img-fluid" alt="">
+            <img src="assets/img/hero-img.svg" class="img-fluid" alt="Hero illustration">
           </div>
         </div>
       </div>
-
-      <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
-        <div class="container position-relative">
-          <div class="row gy-4 mt-5">
-
-            <div class="col-xl-3 col-md-6">
-              <div class="icon-box">
-                <div class="icon"><i class="bi bi-easel"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">NGO Projects</a></h4>
-              </div>
-            </div><!--End Icon Box -->
-
-            <div class="col-xl-3 col-md-6">
-              <div class="icon-box">
-                <div class="icon"><i class="bi bi-gem"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Volunteer Opportunities</a></h4>
-              </div>
-            </div><!--End Icon Box -->
-
-            <div class="col-xl-3 col-md-6">
-              <div class="icon-box">
-                <div class="icon"><i class="bi bi-geo-alt"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Find Drives Near You</a></h4>
-              </div>
-            </div><!--End Icon Box -->
-
-            <div class="col-xl-3 col-md-6">
-              <div class="icon-box">
-                <div class="icon"><i class="bi bi-command"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Request Assistance</a></h4>
-              </div>
-            </div><!--End Icon Box -->
-
-          </div>
-        </div>
-      </div>
-
-    </section><!-- /Hero Section -->
+    </section>
 
     <!-- About Section -->
     <section id="about" class="about section">
@@ -319,145 +285,6 @@
       </div>
 
     </section><!-- /About Section -->
-
-    <!-- Clients Section -->
-    <section id="clients" class="clients section">
-
-      <div class="container">
-
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 2,
-                  "spaceBetween": 40
-                },
-                "480": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 60
-                },
-                "640": {
-                  "slidesPerView": 4,
-                  "spaceBetween": 80
-                },
-                "992": {
-                  "slidesPerView": 6,
-                  "spaceBetween": 120
-                }
-              }
-            }
-          </script>
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
-          </div>
-        </div>
-
-      </div>
-
-    </section><!-- /Clients Section -->
-
-    <!-- Stats Section -->
-    <section id="stats" class="stats section">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100"> 
-
-        <div class="row gy-4 align-items-center">
-
-          <div class="col-lg-5">
-            <img src="assets/img/stats-img.svg" alt="" class="img-fluid">
-          </div>
-
-          <div class="col-lg-7">
-
-            <div class="row gy-4">
-
-              <div class="col-lg-6">
-                <div class="stats-item d-flex">
-                  <i class="bi bi-emoji-smile flex-shrink-0"></i>
-                  <div>
-                    <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>Over 232 lives transformed through our initiatives, </strong> <span>creating lasting impact and opportunities for growth.</span></p>
-                  </div>
-                </div>
-              </div><!-- End Stats Item -->
-
-              <div class="col-lg-6">
-                <div class="stats-item d-flex">
-                  <i class="bi bi-journal-richtext flex-shrink-0"></i>
-                  <div>
-                    <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>521 completed projects addressing critical needs,</strong> <span> from education and healthcare to community development.</span></p>
-                  </div>
-                </div>
-              </div><!-- End Stats Item -->
-
-              <div class="col-lg-6">
-                <div class="stats-item d-flex">
-                  <i class="bi bi-headset flex-shrink-0"></i>
-                  <div>
-                    <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>Providing over 1453 hours of support </strong> <span>to ensure every project and beneficiary receives the attention and care they deserve.</span></p>
-                  </div>
-                </div>
-              </div><!-- End Stats Item -->
-
-              <div class="col-lg-6">
-                <div class="stats-item d-flex">
-                  <i class="bi bi-people flex-shrink-0"></i>
-                  <div>
-                    <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>With 32 hardworking and passionate volunteers, </strong> <span>we bring our vision of empowerment and collaboration to life every day.</span></p>
-                  </div>
-                </div>
-              </div><!-- End Stats Item -->
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Stats Section -->
-
-    <!-- Call To Action Section -->
-    <section id="call-to-action" class="call-to-action section dark-background">
-
-      <div class="container">
-        <img src="assets/img/cta-bg.jpg" alt="">
-        <div class="content row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
-          <div class="col-xl-10">
-            <div class="text-center">
-              <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox play-btn"></a>
-              <h3>Call To Action</h3>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <a class="cta-btn" href="#">Call To Action</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </section><!-- /Call To Action Section -->
 
     <!-- Services Section -->
     <section id="services" class="services section">
@@ -546,130 +373,87 @@
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 1,
-                  "spaceBetween": 40
-                },
-                "1200": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 10
-                }
-              }
-            }
-          </script>
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Testimonials</h2>
+          <p>What our community says about us</p>
         </div>
 
-      </div>
+        <div class="testimonial-wrapper">
+          <div class="testimonial-container">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-item">
+              <div class="testimonial-header">
+                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                <div class="testimonial-info">
+                  <h3>Sarah Johnson</h3>
+                  <h4>Volunteer</h4>
+                </div>
+              </div>
+              <div class="testimonial-content">
+                <p>Working with SahAI has been an incredible experience. The platform made it easy to find meaningful volunteer opportunities.</p>
+              </div>
+            </div>
 
-    </section><!-- /Testimonials Section -->
+            <!-- Testimonial 2 -->
+            <div class="testimonial-item">
+              <div class="testimonial-header">
+                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                <div class="testimonial-info">
+                  <h3>John Davis</h3>
+                  <h4>NGO Partner</h4>
+                </div>
+              </div>
+              <div class="testimonial-content">
+                <p>SahAI has transformed how we manage our volunteer programs. Their platform's efficiency is remarkable.</p>
+              </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-item">
+              <div class="testimonial-header">
+                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                <div class="testimonial-info">
+                  <h3>Emily Chen</h3>
+                  <h4>Community Leader</h4>
+                </div>
+              </div>
+              <div class="testimonial-content">
+                <p>The support and resources provided by SahAI have been instrumental in bringing positive change.</p>
+              </div>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div class="testimonial-item">
+              <div class="testimonial-header">
+                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                <div class="testimonial-info">
+                  <h3>Michael Brown</h3>
+                  <h4>Project Lead</h4>
+                </div>
+              </div>
+              <div class="testimonial-content">
+                <p>The collaborative environment fostered by SahAI has led to amazing community initiatives.</p>
+              </div>
+            </div>
+
+            <!-- Testimonial 5 -->
+            <div class="testimonial-item">
+              <div class="testimonial-header">
+                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                <div class="testimonial-info">
+                  <h3>Lisa Wong</h3>
+                  <h4>Volunteer Coordinator</h4>
+                </div>
+              </div>
+              <div class="testimonial-content">
+                <p>Managing volunteer programs has never been easier. SahAI provides all the tools we need.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Team Section -->
     <section id="team" class="team section">
@@ -746,76 +530,64 @@
 
     </section><!-- /Team Section -->
 
-    <!-- Faq Section -->
+    <!-- FAQ Section -->
     <section id="faq" class="faq section">
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="content px-xl-5">
-              <h3><span>Frequently Asked </span><strong>Questions</strong></h3>
-              <p>
-                Your questions answered to make your experience seamless.
-              </p>
+      <div class="container faq-section">
+        <h1 class="faq-title">Frequently Asked Questions</h1>
+        <div class="accordion" id="faqAccordion">
+          <div class="faq-item">
+            <button class="faq-question" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+              How can I contribute as a volunteer?
+            </button>
+            <div id="faq1" class="collapse show" data-bs-parent="#faqAccordion">
+              <div class="faq-answer">
+                You can contribute by registering on our platform and choosing from various opportunities listed by NGOs and communities. Once registered, you'll receive updates about ongoing projects where your help is needed.
+              </div>
             </div>
           </div>
-
-          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-
-            <div class="faq-container">
-              <div class="faq-item faq-active">
-                <h3><span class="num">1.</span> <span>How can I contribute as a volunteer?</span></h3>
-                <div class="faq-content">
-                  <p>You can contribute by registering on our platform and choosing from various opportunities listed by NGOs and communities. 
-                    Once registered, you'll receive updates about ongoing projects where your help is needed.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3><span class="num">2.</span> <span>What types of projects does your organization support?</span></h3>
-                <div class="faq-content">
-                  <p>We support projects in areas like education, healthcare, disaster relief, environmental sustainability, and community development. 
-                    Our focus is on creating a meaningful impact.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3><span class="num">3.</span> <span>Is there any cost associated with volunteering?</span></h3>
-                <div class="faq-content">
-                  <p>No, volunteering is free of charge. However, if the project requires any specific items or resources, those details will be communicated beforehand.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3><span class="num">4.</span> <span>How do I post a request for help or start a drive?</span></h3>
-                <div class="faq-content">
-                  <p>To post a request or start a drive, you need to sign up as a member of our platform. 
-                    Once signed in, you can fill out a form detailing your requirements or drive objectives, and our team will guide you through the process.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3><span class="num">5.</span> <span>Can I collaborate with your organization as an NGO?</span></h3>
-                <div class="faq-content">
-                  <p>Absolutely! We encourage collaborations with NGOs. You can reach out to us through our contact form or email to discuss partnership opportunities.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
+          <div class="faq-item">
+            <button class="faq-question" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+              What types of projects does your organization support?
+            </button>
+            <div id="faq2" class="collapse" data-bs-parent="#faqAccordion">
+              <div class="faq-answer">
+                We support projects in areas like education, healthcare, disaster relief, environmental sustainability, and community development. Our focus is on creating a meaningful impact.
+              </div>
             </div>
-
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+              Is there any cost associated with volunteering?
+            </button>
+            <div id="faq3" class="collapse" data-bs-parent="#faqAccordion">
+              <div class="faq-answer">
+                No, volunteering is free of charge. However, if the project requires any specific items or resources, those details will be communicated beforehand.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+              How do I post a request for help or start a drive?
+            </button>
+            <div id="faq4" class="collapse" data-bs-parent="#faqAccordion">
+              <div class="faq-answer">
+                To post a request or start a drive, you need to sign up as a member of our platform. Once signed in, you can fill out a form detailing your requirements or drive objectives, and our team will guide you through the process.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+              Can I collaborate with your organization as an NGO?
+            </button>
+            <div id="faq5" class="collapse" data-bs-parent="#faqAccordion">
+              <div class="faq-answer">
+                Absolutely! We encourage collaborations with NGOs. You can reach out to us through our contact form or email to discuss partnership opportunities.
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
-
-    </section><!-- /Faq Section -->
+    </section>
 
     <!-- Recent Posts Section -->
     <section id="recent-posts" class="recent-posts section">
@@ -823,7 +595,7 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Recent Blog Posts</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>Explore our latest insights and stories from the field of social impact.</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -834,21 +606,21 @@
             <article>
 
               <div class="post-img">
-                <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+                <img src="assets/img/blog/social-impact.jpg" alt="Social Impact" class="img-fluid">
               </div>
 
-              <p class="post-category">Politics</p>
+              <p class="post-category">Social Impact</p>
 
               <h2 class="title">
-                <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
+                <a href="blog-details.html">Creating Meaningful Change in Communities</a>
               </h2>
 
               <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+                <img src="assets/img/blog/author1.jpg" alt="Author" class="img-fluid post-author-img flex-shrink-0">
                 <div class="post-meta">
-                  <p class="post-author">Maria Doe</p>
+                  <p class="post-author">Jane Doe</p>
                   <p class="post-date">
-                    <time datetime="2022-01-01">Jan 1, 2022</time>
+                    <time datetime="2023-10-01">Oct 1, 2023</time>
                   </p>
                 </div>
               </div>
@@ -860,21 +632,21 @@
             <article>
 
               <div class="post-img">
-                <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
+                <img src="assets/img/blog/volunteering.jpg" alt="Volunteering" class="img-fluid">
               </div>
 
-              <p class="post-category">Sports</p>
+              <p class="post-category">Volunteering</p>
 
               <h2 class="title">
-                <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
+                <a href="blog-details.html">The Power of Volunteerism: Stories from the Field</a>
               </h2>
 
               <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-2.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+                <img src="assets/img/blog/author2.jpg" alt="Author" class="img-fluid post-author-img flex-shrink-0">
                 <div class="post-meta">
-                  <p class="post-author">Allisa Mayer</p>
+                  <p class="post-author">John Smith</p>
                   <p class="post-date">
-                    <time datetime="2022-01-01">Jun 5, 2022</time>
+                    <time datetime="2023-09-15">Sep 15, 2023</time>
                   </p>
                 </div>
               </div>
@@ -886,21 +658,21 @@
             <article>
 
               <div class="post-img">
-                <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
+                <img src="assets/img/blog/innovation.jpg" alt="Innovation" class="img-fluid">
               </div>
 
-              <p class="post-category">Entertainment</p>
+              <p class="post-category">Innovation</p>
 
               <h2 class="title">
-                <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
+                <a href="blog-details.html">Innovative Solutions for Global Challenges</a>
               </h2>
 
               <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-3.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+                <img src="assets/img/blog/author3.jpg" alt="Author" class="img-fluid post-author-img flex-shrink-0">
                 <div class="post-meta">
-                  <p class="post-author">Mark Dower</p>
+                  <p class="post-author">Emily Johnson</p>
                   <p class="post-date">
-                    <time datetime="2022-01-01">Jun 22, 2022</time>
+                    <time datetime="2023-08-30">Aug 30, 2023</time>
                   </p>
                 </div>
               </div>
@@ -908,7 +680,7 @@
             </article>
           </div><!-- End post list item -->
 
-        </div><!-- End recent posts list -->
+        </div>
 
       </div>
 
@@ -1086,6 +858,36 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      
+      document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+      themeToggle.checked = savedTheme === 'dark';
+
+      themeToggle.addEventListener('change', function() {
+        const newTheme = this.checked ? 'dark' : 'light';
+        document.body.classList.toggle('dark-theme', newTheme === 'dark');
+        localStorage.setItem('theme', newTheme);
+      });
+
+      // Individual Login
+      document.getElementById('individualLoginForm')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        localStorage.setItem('individualName', 'Sample Individual Name');
+        window.location.href = 'pages/individual/individual-welcome.html';
+      });
+
+      // NGO Login
+      document.getElementById('ngoLoginForm')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        localStorage.setItem('ngoName', 'Sample NGO Name');
+        window.location.href = 'pages/ngo/ngo-welcome.html';
+      });
+    });
+  </script>
 
 </body>
 

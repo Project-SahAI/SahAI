@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Needs & Opportunities - SahAI</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f7f6;
+      font-family: 'Poppins', sans-serif;
+      color: #2d4356;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    body.dark-theme {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #0ea2bd;
+    }
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      background-color: #ffffff;
+    }
+    body.dark-theme .card {
+      background-color: #1e1e1e;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    .card-title {
+      color: #0ea2bd;
+      font-weight: bold;
+    }
+    .card-text {
+      color: #555;
+    }
+    body.dark-theme .card-text {
+      color: #b0b0b0;
+    }
+    .badge {
+      font-size: 0.9rem;
+    }
+    .btn-outline-primary {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .btn-outline-primary:hover {
+      background-color: #0ea2bd;
+      color: white;
+    }
+    .btn-primary {
+      background-color: #4ea685;
+      border-color: #4ea685;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #3b8d6a;
+      border-color: #3b8d6a;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .card-footer {
+      background-color: #f8f9fa;
+      border-top: 1px solid #e9ecef;
+      padding: 15px;
+    }
+    body.dark-theme .card-footer {
+      background-color: #2a2a2a;
+      border-top: 1px solid #444;
+    }
+    .modal-content {
+      background-color: #ffffff;
+      color: #2d4356;
+    }
+    body.dark-theme .modal-content {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="section-title">Community Needs & Volunteer Opportunities</h1>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <h2>Community Needs</h2>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">School Renovation Needed</h5>
+            <p class="card-text">Local school requires urgent infrastructure repair</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <span class="badge bg-danger">High Priority</span>
+            <button class="btn btn-sm btn-outline-primary">
+              <i class="fas fa-thumbs-up"></i> Upvote (42)
+            </button>
+          </div>
+        </div>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Food Drive Support</h5>
+            <p class="card-text">Help us collect and distribute food to those in need</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <span class="badge bg-warning">Medium Priority</span>
+            <button class="btn btn-sm btn-outline-primary">
+              <i class="fas fa-thumbs-up"></i> Upvote (30)
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <h2>Volunteer Opportunities</h2>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Teaching Volunteers Needed</h5>
+            <p class="card-text">Help educate underprivileged children</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#opportunityModal">
+              <i class="fas fa-info-circle"></i> More Info
+            </button>
+          </div>
+        </div>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Healthcare Assistants</h5>
+            <p class="card-text">Join our team to provide basic healthcare services</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#opportunityModal">
+              <i class="fas fa-info-circle"></i> More Info
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Opportunity Modal -->
+  <div class="modal fade" id="opportunityModal" tabindex="-1" aria-labelledby="opportunityModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="opportunityModalLabel">Volunteer Opportunity Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h3>Teaching Volunteers Needed</h3>
+          <p>Help educate underprivileged children in our community.</p>
+          <h4>Opportunity Details</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec sem facilisis, a tincidunt nisi fermentum. Integer nec libero nec nulla facilisis tincidunt.</p>
+          <p>Responsibilities include:</p>
+          <ul>
+            <li>Conducting educational sessions</li>
+            <li>Preparing learning materials</li>
+            <li>Engaging with children in activities</li>
+          </ul>
+          <p>Requirements:</p>
+          <ul>
+            <li>Passion for teaching and community service</li>
+            <li>Previous experience in education is a plus</li>
+            <li>Commitment of at least 5 hours per week</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyModal">Apply Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Apply Now Modal -->
+  <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="applyModalLabel">Apply for Volunteer Opportunity</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Application</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

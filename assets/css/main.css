@@ -1,16 +1,5 @@
-/**
-* Template Name: Impact
-* Template URL: https://bootstrapmade.com/impact-bootstrap-business-website-template/
-* Updated: Aug 07 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 
-/*--------------------------------------------------------------
-# Font & Color Variables
-# Help: https://bootstrapmade.com/color-system/
---------------------------------------------------------------*/
-/* Fonts */
+
 :root {
   --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --heading-font: "Montserrat",  sans-serif;
@@ -20,11 +9,15 @@
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root { 
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #222222; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #172a28; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #008374; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --default-color: #2d4356; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #1a2b3c; /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #0ea2bd; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --nav-bg: rgba(255, 255, 255, 0.98);
+  --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --hero-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
@@ -231,12 +224,16 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  --background-color: #008374;
-  --heading-color: #ffffff;
-  color: var(--default-color);
-  transition: all 0.5s;
-  z-index: 997;
-  background-color: var(--background-color);
+  --background-color: var(--nav-bg);
+  --heading-color: #1a2b3c;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 15px 0;
+  z-index: 1030; /* Increased z-index */
+  background: var(--background-color);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
 .header .topbar {
@@ -330,8 +327,8 @@ h6 {
   .navmenu ul {
     margin: 0;
     padding: 0;
-    display: flex;
     list-style: none;
+    display: flex;
     align-items: center;
   }
 
@@ -348,19 +345,19 @@ h6 {
     padding-right: 0;
   }
 
-  .navmenu a,
-  .navmenu a:focus {
-    color: var(--nav-color);
+  .navmenu a {
+    color: var(--heading-color) !important; /* Force color to ensure visibility */
     font-size: 15px;
-    padding: 0 2px;
-    font-family: var(--nav-font);
     font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    white-space: nowrap;
+    padding: 10px 20px;
     transition: 0.3s;
+    text-decoration: none;
     position: relative;
+  }
+
+  .navmenu a:hover,
+  .navmenu .active {
+    color: var(--accent-color) !important;
   }
 
   .navmenu a i,
@@ -397,19 +394,19 @@ h6 {
   }
 
   .navmenu .dropdown ul {
-    margin: 0;
-    padding: 10px 0;
-    background: var(--nav-dropdown-background-color);
     display: block;
     position: absolute;
-    visibility: hidden;
     left: 14px;
-    top: 130%;
-    opacity: 0;
-    transition: 0.3s;
-    border-radius: 4px;
+    top: 100%;
+    margin: 0;
+    padding: 10px 0;
     z-index: 99;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    background: var(--background-color);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    transition: 0.3s;
   }
 
   .navmenu .dropdown ul li {
@@ -419,8 +416,7 @@ h6 {
   .navmenu .dropdown ul a {
     padding: 10px 20px;
     font-size: 15px;
-    text-transform: none;
-    color: var(--nav-dropdown-color);
+    color: var(--heading-color) !important;
   }
 
   .navmenu .dropdown ul a i {
@@ -429,13 +425,12 @@ h6 {
 
   .navmenu .dropdown ul a:hover,
   .navmenu .dropdown ul .active:hover,
-  .navmenu .dropdown ul li:hover>a {
-    color: var(--nav-dropdown-hover-color);
+  .navmenu .dropdown ul li:hover > a {
+    color: var(--accent-color) !important;
   }
 
   .navmenu .dropdown:hover>ul {
     opacity: 1;
-    top: 100%;
     visibility: visible;
   }
 
@@ -576,6 +571,16 @@ h6 {
 
   .mobile-nav-active .navmenu>ul {
     display: block;
+    background-color: var(--background-color);
+  }
+
+  .mobile-nav-active .navmenu a {
+    color: var(--heading-color) !important;
+  }
+
+  .mobile-nav-active .navmenu a:hover,
+  .mobile-nav-active .navmenu .active {
+    color: var(--accent-color) !important;
   }
 }
 
@@ -583,10 +588,11 @@ h6 {
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
-  color: var(--default-color);
-  background-color: var(--background-color);
-  font-size: 14px;
   position: relative;
+  z-index: 2;
+  background: linear-gradient(45deg, #1a2b3c, #2d4356);
+  color: var(--contrast-color);
+  padding: 60px 0 0 0;
 }
 
 .footer .footer-top {
@@ -706,7 +712,14 @@ h6 {
   z-index: 999999;
   overflow: hidden;
   background: var(--background-color);
-  transition: all 0.6s ease-out;
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+  visibility: visible;
+}
+
+#preloader.hide {
+  opacity: 0;
+  visibility: hidden;
 }
 
 #preloader:before {
@@ -714,12 +727,12 @@ h6 {
   position: fixed;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
-  border: 6px solid #ffffff;
+  border: 6px solid var(--background-color);
   border-color: var(--accent-color) transparent var(--accent-color) transparent;
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  animation: animate-preloader 1.5s linear infinite;
+  animation: animate-preloader 1s linear infinite;
 }
 
 @keyframes animate-preloader {
@@ -835,11 +848,13 @@ h6 {
 --------------------------------------------------------------*/
 section,
 .section {
-  color: var(--default-color);
+  position: relative;
+  z-index: 1;
   background-color: var(--background-color);
-  padding: 60px 0;
-  scroll-margin-top: 112px;
-  overflow: clip;
+  padding: 80px 0;
+  overflow: visible;
+  margin-top: 0;
+  visibility: visible;
 }
 
 @media (max-width: 1199px) {
@@ -854,17 +869,21 @@ section,
 # Global Section Titles
 --------------------------------------------------------------*/
 .section-title {
+  margin-bottom: 60px;
   text-align: center;
-  padding-bottom: 60px;
   position: relative;
+  z-index: 2;
 }
 
 .section-title h2 {
+  color: var(--heading-color);
   font-size: 32px;
-  font-weight: 700;
   margin-bottom: 20px;
-  padding-bottom: 20px;
-  position: relative;
+}
+
+.section-title p {
+  color: var(--default-color);
+  opacity: 0.9;
 }
 
 .section-title h2:after {
@@ -880,38 +899,34 @@ section,
   margin: auto;
 }
 
-.section-title p {
-  margin-bottom: 0;
-}
-
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-  width: 100%;
-  position: relative;
-  padding: 140px 0 0 0;
-}
-
-.hero .container {
-  position: relative;
-  z-index: 3;
+  background: var(--hero-bg);
+  padding: 180px 0 80px 0;
+  min-height: 80vh; /* Changed from 100vh to prevent overlap */
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
 }
 
 .hero h2 {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.hero h2 .accent {
-  color: var(--conrast-color);
+  color: var(--heading-color);
+  font-size: 56px;
+  line-height: 1.2;
+  margin-bottom: 30px;
 }
 
 .hero p {
-  color: color-mix(in srgb, var(--default-color), transparent 40%);
-  font-weight: 400;
+  color: var(--default-color);
+  font-size: 18px;
   margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.hero .accent {
+  color: var(--accent-color);
 }
 
 .hero .btn-get-started {
@@ -1029,6 +1044,13 @@ section,
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
+.about {
+  padding-top: 80px;
+  position: relative;
+  z-index: 2;
+  background: var(--background-color);
+}
+
 .about h3 {
   font-weight: 700;
   font-size: 28px;
@@ -1270,11 +1292,25 @@ section,
 /*--------------------------------------------------------------
 # Services Section
 --------------------------------------------------------------*/
+.services {
+  padding-top: 80px;
+  position: relative;
+  z-index: 2;
+  background: var(--background-color);
+}
+
 .services .service-item {
   background-color: var(--surface-color);
   padding: 40px;
-  box-shadow: 0px 0 30px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   height: 100%;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.services .service-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .services .service-item .icon {
@@ -1349,102 +1385,114 @@ section,
 /*--------------------------------------------------------------
 # Testimonials Section
 --------------------------------------------------------------*/
-.testimonials .testimonial-item {
-  background-color: var(--surface-color);
-  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-  box-sizing: content-box;
-  padding: 30px;
-  margin: 30px 15px;
+.testimonials {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.testimonial-wrapper {
   position: relative;
-  height: 100%;
+  padding: 20px 0;
 }
 
-.testimonials .testimonial-item .testimonial-img {
-  width: 90px;
-  border-radius: 50px;
+.testimonial-container {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.testimonial-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.testimonial-item {
+  flex: 0 0 300px;
+  background-color: var(--surface-color);
+  box-shadow: var(--card-shadow);
+  border-radius: 15px;
+  padding: 30px;
+  transition: all 0.3s ease;
+}
+
+.testimonial-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.testimonial-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
   margin-right: 15px;
+  border: 3px solid var(--accent-color);
 }
 
-.testimonials .testimonial-item h3 {
+.testimonial-info {
+  flex: 1;
+}
+
+.testimonial-info h3 {
   font-size: 18px;
-  font-weight: bold;
-  margin: 10px 0 5px 0;
+  margin: 0 0 5px 0;
+  color: var(--heading-color);
 }
 
-.testimonials .testimonial-item h4 {
+.testimonial-info h4 {
   font-size: 14px;
-  color: color-mix(in srgb, var(--default-color), transparent 40%);
+  color: var(--accent-color);
   margin: 0;
 }
 
-.testimonials .testimonial-item .stars {
-  margin: 10px 0;
-}
-
-.testimonials .testimonial-item .stars i {
-  color: #ffc107;
-  margin: 0 1px;
-}
-
-.testimonials .testimonial-item .quote-icon-left,
-.testimonials .testimonial-item .quote-icon-right {
-  color: color-mix(in srgb, var(--accent-color), transparent 50%);
-  font-size: 26px;
-  line-height: 0;
-}
-
-.testimonials .testimonial-item .quote-icon-left {
-  display: inline-block;
-  left: -5px;
+.testimonial-content {
   position: relative;
+  padding: 20px 0;
 }
 
-.testimonials .testimonial-item .quote-icon-right {
-  display: inline-block;
-  right: -5px;
-  position: relative;
-  top: 10px;
-  transform: scale(-1, -1);
-}
-
-.testimonials .testimonial-item p {
+.testimonial-content p {
   font-style: italic;
-  margin: 15px auto 15px auto;
-}
-
-.testimonials .swiper-wrapper {
-  height: auto;
-}
-
-.testimonials .swiper-pagination {
-  margin-top: 20px;
+  margin: 0;
+  padding: 0 0 0 25px;
   position: relative;
+  color: var(--default-color);
+  line-height: 1.6;
 }
 
-.testimonials .swiper-pagination .swiper-pagination-bullet {
-  width: 12px;
-  height: 12px;
-  background-color: color-mix(in srgb, var(--default-color), transparent 85%);
-  opacity: 1;
+.testimonial-content p::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -10px;
+  font-size: 50px;
+  color: var(--accent-color);
+  opacity: 0.3;
+  line-height: 1;
 }
 
-.testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: var(--accent-color);
-}
-
-@media (max-width: 767px) {
-  .testimonials .testimonial-wrap {
-    padding-left: 0;
+@media (max-width: 992px) {
+  .testimonial-container {
+    gap: 20px;
   }
-
-  .testimonials .testimonial-item {
-    padding: 30px;
-    margin: 15px;
+  
+  .testimonial-item {
+    flex: 0 0 280px;
   }
+}
 
-  .testimonials .testimonial-item .testimonial-img {
-    position: static;
-    left: auto;
+@media (max-width: 768px) {
+  .testimonial-item {
+    flex: 0 0 260px;
   }
 }
 
@@ -1539,13 +1587,26 @@ section,
 /*--------------------------------------------------------------
 # Team Section
 --------------------------------------------------------------*/
+.team {
+  padding-top: 80px;
+  position: relative;
+  z-index: 2;
+  background: var(--background-color);
+}
+
 .team .member {
   background-color: var(--surface-color);
-  box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   text-align: center;
   border-radius: 15px;
   padding: 15px;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.team .member:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .team .member img {
@@ -1614,7 +1675,7 @@ section,
 
 .pricing .pricing-item {
   background-color: var(--surface-color);
-  box-shadow: 0 3px 20px -2px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   padding: 60px 40px;
   height: 100%;
   position: relative;
@@ -1763,80 +1824,56 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
 
-.faq .faq-container .faq-item {
-  background-color: var(--surface-color);
+.faq .faq-container {
+  padding: 0;
+}
+
+.faq .faq-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
   position: relative;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
 }
 
-.faq .faq-container .faq-item:last-child {
-  margin-bottom: 0;
-}
-
-.faq .faq-container .faq-item h3 {
-  font-weight: 600;
+.faq .faq-item h3 {
   font-size: 18px;
-  line-height: 24px;
-  margin: 0 30px 0 0;
-  transition: 0.3s;
-  cursor: pointer;
-  display: flex;
-  align-items: flex-start;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--heading-color);
+  margin: 0 0 15px 0;
 }
 
-.faq .faq-container .faq-item h3 .num {
+.faq .faq-item h3 .num {
   color: var(--accent-color);
-  padding-right: 5px;
+  padding-right: 10px;
 }
 
-.faq .faq-container .faq-item h3:hover {
-  color: var(--accent-color);
+.faq .faq-item .faq-content {
+  padding: 0;
 }
 
-.faq .faq-container .faq-item .faq-content {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: 0.3s ease-in-out;
-  visibility: hidden;
-  opacity: 0;
+.faq .faq-item .faq-content p {
+  color: var(--default-color);
+  line-height: 1.6;
+  margin: 0;
 }
 
-.faq .faq-container .faq-item .faq-content p {
-  margin-bottom: 0;
-  overflow: hidden;
-}
-
-.faq .faq-container .faq-item .faq-toggle {
+.faq .faq-item i {
+  font-size: 24px;
   position: absolute;
+  right: 0;
   top: 20px;
-  right: 20px;
-  font-size: 16px;
-  line-height: 0;
-  transition: 0.3s;
+  transition: transform 0.3s ease;
+  color: var(--accent-color);
   cursor: pointer;
 }
 
-.faq .faq-container .faq-item .faq-toggle:hover {
-  color: var(--accent-color);
+.faq .faq-item.active .faq-content {
+  max-height: 1000px; /* Large enough to contain content */
+  transition: max-height 0.5s ease-in;
 }
 
-.faq .faq-container .faq-active h3 {
-  color: var(--accent-color);
-}
-
-.faq .faq-container .faq-active .faq-content {
-  grid-template-rows: 1fr;
-  visibility: visible;
-  opacity: 1;
-  padding-top: 10px;
-}
-
-.faq .faq-container .faq-active .faq-toggle {
-  transform: rotate(90deg);
-  color: var(--accent-color);
+.faq .faq-item.active i {
+  transform: rotate(180deg);
 }
 
 /*--------------------------------------------------------------
@@ -1899,6 +1936,13 @@ section,
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/
+.contact {
+  padding-top: 80px;
+  position: relative;
+  z-index: 2;
+  background: var(--background-color);
+}
+
 .contact .info-container {
   background-color: var(--accent-color);
   height: 100%;
@@ -1957,6 +2001,7 @@ section,
   width: 100%;
   height: 100%;
   padding: 30px;
+  border-radius: 15px;
 }
 
 .contact .php-email-form input[type=text],
@@ -1965,7 +2010,7 @@ section,
   font-size: 14px;
   padding: 10px 15px;
   box-shadow: none;
-  border-radius: 0;
+  border-radius: 8px;
   color: var(--default-color);
   background-color: var(--surface-color);
   border-color: color-mix(in srgb, var(--default-color), transparent 80%);
@@ -2852,19 +2897,23 @@ section,
 
 /* Fancy Button */
 .btn-fancy {
-  background-color: #4e73df;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 30px;
+  background: linear-gradient(45deg, var(--accent-color), #14c7e6);
+  color: #ffffff !important;
+  padding: 12px 30px;
+  border-radius: 50px;
   border: none;
   font-weight: 600;
   transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+  display: inline-block;
 }
 
 .btn-fancy:hover {
-  background-color: #2e59d9;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(14, 162, 189, 0.3);
+  color: #ffffff !important;
 }
 
 /* Modal Animation */
@@ -2887,27 +2936,70 @@ section,
 }
 
 .modal-content {
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
-/* Tabs Styling */
+.modal-header {
+  border-bottom: none;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+}
+
+.modal-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+}
+
 .nav-tabs .nav-link {
   border: none;
-  color: #4e73df;
+  color: #555;
   font-weight: bold;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .nav-tabs .nav-link.active {
-  background-color: #4e73df;
-  color: #fff;
-  border-radius: 10px 10px 0 0;
+  color: #007bff;
+  border-bottom: 2px solid #007bff;
 }
 
-/* Form Input Styling */
+.form-label {
+  font-weight: bold;
+  color: #333;
+}
+
 .form-control {
-  border-radius: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
 }
 
 /* Text Below Login Form */
@@ -2926,5 +3018,314 @@ section,
 
 .text-signup a:hover {
   text-decoration: underline;
+}
+
+/* Fix main content wrapper */
+.main {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+/* Ensure AOS animations don't affect layout */
+[data-aos] {
+  pointer-events: none;
+}
+
+[data-aos].aos-animate {
+  pointer-events: auto;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  --background-color: #1a1a1a;
+  --surface-color: #2d2d2d;
+  --heading-color: #ffffff;
+  --default-color: #e0e0e0;
+  --contrast-color: #ffffff;
+  --nav-bg: rgba(26, 26, 26, 0.98);
+  --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --hero-bg: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+/* Theme Toggle Button */
+.btn-theme {
+  background: transparent;
+  border: none;
+  color: var(--heading-color);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  outline: none;
+}
+
+.btn-theme:hover {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+}
+
+/* Ensure theme transitions are smooth */
+:root[data-theme] {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body[data-theme] {
+  transition: background-color 0.3s ease;
+}
+
+/* Enhanced Animations */
+.service-item {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+
+.service-item:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+.testimonial-item {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.testimonial-item:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.member {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.member:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Smooth theme transition for all elements */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Enhanced hover effects */
+.nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-color);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after {
+  transform: translateX(0);
+}
+
+/* Animated section titles */
+.section-title h2 {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-title h2::after {
+  animation: slideIn 1s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Light Theme (default) */
+:root {
+  --background-color: #ffffff;
+  --surface-color: #ffffff;
+  --heading-color: #1a2b3c;
+  --default-color: #2d4356;
+  --accent-color: #0ea2bd;
+  --contrast-color: #ffffff;
+  --nav-bg: rgba(255, 255, 255, 0.98);
+  --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --hero-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --background-color: #121212;
+  --surface-color: #1e1e1e;
+  --heading-color: #ffffff;
+  --default-color: #e0e0e0;
+  --accent-color: #14c7e6;
+  --contrast-color: #ffffff;
+  --nav-bg: rgba(18, 18, 18, 0.98);
+  --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --hero-bg: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+}
+
+/* Dark theme specific adjustments */
+[data-theme="dark"] {
+  /* Body and general background */
+  background-color: var(--background-color);
+  color: var(--default-color);
+
+  /* Header */
+  .header {
+    background: var(--nav-bg);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Navigation */
+  .navmenu a {
+    color: var(--default-color) !important;
+  }
+
+  .navmenu a:hover {
+    color: var(--accent-color) !important;
+  }
+
+  /* Sections */
+  .section {
+    background-color: var(--background-color);
+  }
+
+  /* Cards and Boxes */
+  .service-item,
+  .testimonial-item,
+  .member,
+  .faq-item {
+    background-color: var(--surface-color);
+    box-shadow: var(--card-shadow);
+  }
+
+  /* Text colors */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color);
+  }
+
+  p {
+    color: var(--default-color);
+  }
+
+  /* Form elements */
+  .form-control {
+    background-color: var(--surface-color);
+    border-color: var(--border-color);
+    color: var(--default-color);
+  }
+
+  /* Modals */
+  .modal-content {
+    background-color: var(--surface-color);
+    border-color: var(--border-color);
+  }
+
+  .modal-header {
+    border-bottom-color: var(--border-color);
+  }
+
+  .modal-footer {
+    border-top-color: var(--border-color);
+  }
+
+  /* Buttons */
+  .btn-theme {
+    color: var(--heading-color);
+  }
+
+  .btn-theme:hover {
+    background: var(--accent-color);
+    color: var(--contrast-color);
+  }
+
+  /* Hero section */
+  .hero {
+    background: var(--hero-bg);
+  }
+
+  /* Footer */
+  .footer {
+    background: linear-gradient(45deg, #121212, #1e1e1e);
+  }
+}
+
+/* Smooth transitions for theme switching */
+body,
+.header,
+.section,
+.service-item,
+.testimonial-item,
+.member,
+.faq-item,
+.modal-content,
+.form-control {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Theme Switch */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--default-color);
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--accent-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
 }
 

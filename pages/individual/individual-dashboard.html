@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SahAI - Individual Dashboard</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-color: #0ea2bd;
+      --secondary-color: #4ea685;
+      --background-light: #f4f7f6;
+      --text-dark: #2d4356;
+      --card-bg: #ffffff;
+      --card-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    /* Theme Toggle Styles */
+    .theme-switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .theme-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--primary-color);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    /* Dark Theme Styles */
+    body.dark-theme {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    body.dark-theme .dashboard-container,
+    body.dark-theme .dashboard-card {
+      background-color: #1e1e1e;
+      color: #ffffff;
+    }
+
+    body.dark-theme .welcome-section {
+      background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+      color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    body.dark-theme .achievement-item,
+    body.dark-theme .resource-item,
+    body.dark-theme .event-item,
+    body.dark-theme .impact-story {
+      background-color: #2a2a2a;
+      border-color: #333;
+      color: #ffffff;
+    }
+
+    body.dark-theme .stats-card {
+      background-color: #2a2a2a;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    body.dark-theme .quick-actions .btn {
+      background-color: #333;
+      color: #ffffff;
+      border-color: #444;
+    }
+
+    body.dark-theme .quick-actions .btn:hover {
+      background-color: #444;
+      color: #ffffff;
+    }
+
+    /* Update event date styles for dark theme */
+    body.dark-theme .event-date {
+      background-color: #333;
+      color: #ffffff;
+    }
+
+    body.dark-theme .event-date strong {
+      color: var(--primary-color);
+    }
+
+    body {
+      font-family: 'Inter', 'Poppins', sans-serif;
+      background-color: var(--background-light);
+      color: var(--text-dark);
+    }
+
+    .dashboard-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .welcome-section {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .dashboard-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 30px;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      background: transparent;
+      border-bottom: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .opportunities-section .card-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .opportunity-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid #f1f1f1;
+    }
+
+    .opportunity-item:last-child {
+      border-bottom: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #0c8ba6;
+      transform: translateY(-3px);
+    }
+
+    .profile-dropdown img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .stats-card {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .stats-card .icon {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .quick-actions .btn {
+      margin: 10px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quick-actions .btn i {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    /* New Sections Styles */
+    .achievements-section .achievement-item,
+    .learning-resources .resource-item {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .achievements-section .achievement-icon,
+    .learning-resources .resource-icon {
+      font-size: 2rem;
+      width: 50px;
+      text-align: center;
+    }
+
+    .upcoming-events .event-date {
+      background-color: #f1f3f5;
+      border-radius: 8px;
+      padding: 10px;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .impact-stories .impact-story-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .impact-stories .impact-story-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .impact-stories .impact-story-card img {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .section-header {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .achievement-item,
+    .resource-item,
+    .event-item {
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .achievement-item:hover,
+    .resource-item:hover,
+    .event-item:hover {
+      transform: translateY(-3px);
+    }
+    
+    .dashboard-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    
+    .bg-light {
+      background-color: rgba(0,0,0,0.03) !important;
+    }
+    
+    .text-muted {
+      color: #6c757d !important;
+    }
+
+    .impact-story {
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+
+    .impact-story:hover {
+      transform: translateY(-5px);
+    }
+
+    .impact-story img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .event-date {
+      background: rgba(14, 162, 189, 0.1);
+      padding: 8px;
+      border-radius: 8px;
+      min-width: 60px;
+    }
+
+    .event-date strong {
+      color: var(--primary-color);
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Header -->
+    <div class="dashboard-header">
+      <h1>Dashboard</h1>
+      <div class="d-flex align-items-center">
+        <!-- Theme Toggle -->
+        <label class="theme-switch me-3" for="theme-toggle">
+          <input type="checkbox" id="theme-toggle">
+          <span class="slider"></span>
+        </label>
+
+        <div class="profile-dropdown dropdown">
+          <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+            <img src="/assets/img/profile image.png" alt="Profile">
+            <span id="individual-name" class="ms-2">Individual Name</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="individual-profile.html">My Profile</a></li>
+            <li><a class="dropdown-item" href="/pages/community/community-needs.html">Community Needs</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/index.html">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+      <h2>Welcome Back, <span id="welcome-name">Individual</span>!</h2>
+      <p>You're making a difference, one action at a time.</p>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="row">
+      <!-- Quick Stats -->
+      <div class="col-md-4">
+        <div class="dashboard-card stats-card">
+          <div class="card-body">
+            <div class="icon">
+              <i class="fas fa-hands-helping"></i>
+            </div>
+            <h4>Active Contributions</h4>
+            <h2>3</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="dashboard-card stats-card">
+          <div class="card-body">
+            <div class="icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <h4>Impact Score</h4>
+            <h2>78</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="dashboard-card stats-card">
+          <div class="card-body">
+            <div class="icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <h4>Community Rank</h4>
+            <h2>Silver</h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- Opportunities Section -->
+      <div class="col-md-8">
+        <div class="dashboard-card opportunities-section">
+          <div class="card-header">
+            <h3>Recent Opportunities</h3>
+            <a href="/pages/community/community-needs.html" class="btn btn-sm btn-outline-primary">View All</a>
+          </div>
+          <div class="card-body">
+            <div class="opportunity-item">
+              <div>
+                <h5>Teaching Volunteers Needed</h5>
+                <small>Local School, Mumbai</small>
+              </div>
+              <a href="#" class="btn btn-sm btn-primary">Apply</a>
+            </div>
+            <div class="opportunity-item">
+              <div>
+                <h5>Community Cleanup Drive</h5>
+                <small>City Park, Delhi</small>
+              </div>
+              <a href="#" class="btn btn-sm btn-primary">Join</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="col-md-4">
+        <div class="dashboard-card quick-actions">
+          <div class="card-header">
+            <h3>Quick Actions</h3>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <a href="individual-add-need.html" class="btn btn-outline-primary">
+              <i class="fas fa-plus-circle"></i>
+              Add Community Need
+            </a>
+            <a href="/pages/community/community-needs.html" class="btn btn-outline-secondary">
+              <i class="fas fa-globe"></i>
+              Explore Needs
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Sections -->
+    <div class="row mt-4">
+      <!-- Achievements Section -->
+      <div class="col-md-4">
+        <div class="dashboard-card achievements-section">
+          <div class="section-header d-flex justify-content-between align-items-center mb-3">
+            <h3 class="m-0">Achievements</h3>
+            <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+          </div>
+          <div class="achievement-item d-flex align-items-center p-3 bg-light rounded mb-3">
+            <div class="achievement-icon me-3">
+              <i class="fas fa-medal text-warning fs-3"></i>
+            </div>
+            <div class="achievement-content">
+              <h5 class="mb-1">Gold Medal</h5>
+              <p class="mb-0 text-muted">Highest Impact Score</p>
+            </div>
+          </div>
+          <div class="achievement-item d-flex align-items-center p-3 bg-light rounded mb-3">
+            <div class="achievement-icon me-3">
+              <i class="fas fa-globe text-primary fs-3"></i>
+            </div>
+            <div class="achievement-content">
+              <h5 class="mb-1">Global Impact</h5>
+              <p class="mb-0 text-muted">10+ Countries Reached</p>
+            </div>
+          </div>
+          <div class="achievement-item d-flex align-items-center p-3 bg-light rounded">
+            <div class="achievement-icon me-3">
+              <i class="fas fa-heart text-danger fs-3"></i>
+            </div>
+            <div class="achievement-content">
+              <h5 class="mb-1">Community Leader</h5>
+              <p class="mb-0 text-muted">1000+ Lives Impacted</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learning Resources Section -->
+      <div class="col-md-4">
+        <div class="dashboard-card learning-resources">
+          <div class="section-header d-flex justify-content-between align-items-center mb-3">
+            <h3 class="m-0">Learning Resources</h3>
+            <a href="learning-resources.html" class="btn btn-sm btn-outline-primary">More</a>
+          </div>
+          <div class="resource-item d-flex align-items-center p-3 bg-light rounded mb-3">
+            <div class="resource-icon me-3">
+              <i class="fas fa-video text-primary fs-3"></i>
+            </div>
+            <div class="resource-content">
+              <h5 class="mb-1">Video Tutorials</h5>
+              <p class="mb-0 text-muted">Learn Impact Assessment</p>
+            </div>
+          </div>
+          <div class="resource-item d-flex align-items-center p-3 bg-light rounded mb-3">
+            <div class="resource-icon me-3">
+              <i class="fas fa-book text-success fs-3"></i>
+            </div>
+            <div class="resource-content">
+              <h5 class="mb-1">E-Books</h5>
+              <p class="mb-0 text-muted">Social Impact Guides</p>
+            </div>
+          </div>
+          <div class="resource-item d-flex align-items-center p-3 bg-light rounded">
+            <div class="resource-icon me-3">
+              <i class="fas fa-podcast text-danger fs-3"></i>
+            </div>
+            <div class="resource-content">
+              <h5 class="mb-1">Podcasts</h5>
+              <p class="mb-0 text-muted">Weekly Impact Stories</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upcoming Events Section -->
+      <div class="col-md-4">
+        <div class="dashboard-card upcoming-events">
+          <div class="section-header d-flex justify-content-between align-items-center mb-3">
+            <h3 class="m-0">Upcoming Events</h3>
+            <a href="#" class="btn btn-sm btn-outline-primary">Calendar</a>
+          </div>
+          <div class="event-list">
+            <div class="event-item d-flex align-items-center p-3 bg-light rounded mb-3">
+              <div class="event-date me-3 text-center">
+                <strong class="d-block fs-4">15</strong>
+                <small class="text-muted">Feb</small>
+              </div>
+              <div class="event-info">
+                <h5 class="mb-1">Tree Plantation Drive</h5>
+                <p class="mb-0 text-muted">Central Park, 9:00 AM</p>
+              </div>
+            </div>
+            <div class="event-item d-flex align-items-center p-3 bg-light rounded mb-3">
+              <div class="event-date me-3 text-center">
+                <strong class="d-block fs-4">22</strong>
+                <small class="text-muted">Feb</small>
+              </div>
+              <div class="event-info">
+                <h5 class="mb-1">Community Health Camp</h5>
+                <p class="mb-0 text-muted">City Hospital, 10:00 AM</p>
+              </div>
+            </div>
+            <div class="event-item d-flex align-items-center p-3 bg-light rounded">
+              <div class="event-date me-3 text-center">
+                <strong class="d-block fs-4">05</strong>
+                <small class="text-muted">Mar</small>
+              </div>
+              <div class="event-info">
+                <h5 class="mb-1">Education Fundraiser</h5>
+                <p class="mb-0 text-muted">Community Center, 7:00 PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Impact Stories Section -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="dashboard-card impact-stories">
+          <div class="section-header d-flex justify-content-between align-items-center mb-3">
+            <h3 class="m-0">Your Impact Stories</h3>
+            <a href="#" class="btn btn-sm btn-outline-primary">Share Your Story</a>
+          </div>
+          <div class="p-3">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="impact-story p-3 bg-light rounded">
+                  <img src="../../assets/img/impact-stories/impact-1.jpg" alt="Impact Story" class="img-fluid rounded mb-3">
+                  <h5>Empowering Rural Education</h5>
+                  <p class="text-muted">Provided school supplies to 50 children</p>
+                  <a href="#" class="btn btn-sm btn-outline-secondary">Read More</a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="impact-story p-3 bg-light rounded">
+                  <img src="../../assets/img/impact-stories/impact-2.jpg" alt="Impact Story" class="img-fluid rounded mb-3">
+                  <h5>Community Health Initiative</h5>
+                  <p class="text-muted">Volunteered in health awareness camp</p>
+                  <a href="#" class="btn btn-sm btn-outline-secondary">Read More</a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="impact-story p-3 bg-light rounded">
+                  <img src="../../assets/img/impact-stories/impact-3.jpg" alt="Impact Story" class="img-fluid rounded mb-3">
+                  <h5>Environmental Conservation</h5>
+                  <p class="text-muted">Beach cleanup drive, 500 kg waste collected</p>
+                  <a href="#" class="btn btn-sm btn-outline-secondary">Read More</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Retrieve Individual name from localStorage
+      const individualName = localStorage.getItem('individualName') || 'Individual User';
+      
+      // Update profile name
+      document.getElementById('individual-name').textContent = individualName;
+      document.getElementById('welcome-name').textContent = individualName;
+
+      // Theme Toggle Functionality
+      const themeToggle = document.getElementById('theme-toggle');
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      
+      // Set initial theme
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+      themeToggle.checked = savedTheme === 'dark';
+
+      // Theme toggle event listener
+      themeToggle.addEventListener('change', function() {
+        const newTheme = this.checked ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        document.body.classList.toggle('dark-theme', newTheme === 'dark');
+        
+        // Save theme preference
+        localStorage.setItem('theme', newTheme);
+      });
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Individual Login</title>
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/auth.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <form id="individualLoginForm">
+        <h2>Individual Login</h2>
+        <input type="email" id="individualEmail" placeholder="Email" required>
+        <input type="password" id="individualPassword" placeholder="Password" required>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+        <span class="toggle-link">Don't have an account? <a href="/individual-signup.html">Sign Up</a></span>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('individualLoginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Simply redirect to dashboard
+      localStorage.setItem('individualName', 'Sample Individual Name');
+      window.location.href = 'individual-dashboard.html';
+    });
+  </script>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

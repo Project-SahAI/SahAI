@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Individual Sign Up</title>
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/css/auth.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <form id="individualSignupForm">
+        <h2>Individual Sign Up</h2>
+        <input type="text" id="individualName" placeholder="Full Name" required>
+        <input type="email" id="individualEmail" placeholder="Email Address" required>
+        <input type="phone" id="individualPhone" placeholder="Phone Number" required>
+        <input type="password" id="individualPassword" placeholder="Password" required>
+        <input type="password" id="individualConfirmPassword" placeholder="Confirm Password" required>
+        <button type="submit" class="btn btn-primary w-100">Create Account</button>
+        <span class="toggle-link">Already have an account? <a href="/index.html">Sign In</a></span>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('individualSignupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Simply redirect to dashboard
+      localStorage.setItem('individualName', document.getElementById('individualName').value || 'Sample Individual Name');
+      window.location.href = 'individual-dashboard.html';
+    });
+  </script>
+
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

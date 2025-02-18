@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link href="assets/css/auth.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container sign-up-mode" id="container">
+    <div class="panel right-panel">
+      <h2>Create Account</h2>
+      <p>Enter your personal details to create an account</p>
+      <button id="signUpBtn">Sign Up</button>
+    </div>
+    <div class="form-container">
+      <form>
+        <h2>Sign Up</h2>
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('container');
+    const signUpBtn = document.getElementById('signUpBtn');
+
+    signUpBtn.addEventListener('click', () => {
+      container.classList.add('sign-up-mode');
+    });
+  </script>
+</body>
+</html> 
