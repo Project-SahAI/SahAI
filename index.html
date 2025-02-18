@@ -877,14 +877,14 @@
       document.getElementById('individualLoginForm')?.addEventListener('submit', function(e) {
         e.preventDefault();
         localStorage.setItem('individualName', 'Sample Individual Name');
-        window.location.href = 'pages/individual/individual-welcome.html';
+        window.location.href = '/pages/individual/individual-welcome.html';
       });
 
       // NGO Login
       document.getElementById('ngoLoginForm')?.addEventListener('submit', function(e) {
         e.preventDefault();
         localStorage.setItem('ngoName', 'Sample NGO Name');
-        window.location.href = 'pages/ngo/ngo-welcome.html';
+        window.location.href = '/pages/ngo/ngo-welcome.html';
       });
     });
   </script>
