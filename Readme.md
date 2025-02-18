@@ -20,7 +20,7 @@ SahAi is a community welfare website designed to connect individuals in need wit
 ## Installation
 1. **Clone the repository**:
    ```sh
-   git clone https://github.com/Manushya-a/SahAI.git
+   git clone https://github.com/Project-SahAI/SahAI.git
    cd SahAI
    ```
 2. **Install dependencies**:
