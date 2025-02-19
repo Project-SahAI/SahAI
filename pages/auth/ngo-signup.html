@@ -6,19 +6,81 @@
   <title>NGO Sign Up</title>
   <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="/assets/css/auth.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      width: 450px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      padding: 30px;
+    }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .form-container input {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 100%;
+    }
+    .form-container button {
+      background: #4ea685;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 16px;
+      width: 100%;
+    }
+    .form-container button:hover {
+      background: #3b8d6a;
+    }
+    .toggle-link {
+      text-align: center;
+      margin-top: 10px;
+      color: #4ea685;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .toggle-link a {
+      color: #4ea685;
+      text-decoration: none;
+    }
+    .toggle-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <div class="form-container">
       <form id="ngoSignupForm">
         <h2>NGO Sign Up</h2>
+        <input type="text" id="ngoId" placeholder="NGO ID" required>
+        <input type="text" id="ngoType" placeholder="NGO Type" required>
         <input type="text" id="ngoName" placeholder="NGO Name" required>
-        <input type="text" id="ngoRegistrationNumber" placeholder="NGO Registration Number" required>
         <input type="email" id="ngoEmail" placeholder="Official Email" required>
         <input type="phone" id="ngoPhone" placeholder="Contact Number" required>
+        <input type="text" id="ngoAddress" placeholder="Address" required>
         <input type="password" id="ngoPassword" placeholder="Password" required>
         <input type="password" id="ngoConfirmPassword" placeholder="Confirm Password" required>
-        <button type="submit" class="btn btn-primary w-100">Create NGO Account</button>
+        <button type="submit" class="btn btn-primary">Create NGO Account</button>
         <span class="toggle-link">Already have an account? <a href="/index.html">Sign In</a></span>
       </form>
     </div>
