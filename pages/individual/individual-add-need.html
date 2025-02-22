@@ -167,6 +167,29 @@
         }
       });
     });
+
+    document.getElementById('communityNeedForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const needTitle = document.getElementById('needTitle').value;
+      const needDescription = document.getElementById('needDescription').value;
+      const needLocation = document.getElementById('needLocation').value;
+      const needCategory = document.getElementById('needCategory').value;
+
+      let needs = JSON.parse(localStorage.getItem('communityNeeds')) || [];
+      needs.push({
+        title: needTitle,
+        description: needDescription,
+        location: needLocation,
+        category: needCategory,
+        priority: 'Medium' // This can be dynamic based on your form
+      });
+
+      localStorage.setItem('communityNeeds', JSON.stringify(needs));
+
+      alert('Need added successfully!');
+      window.location.reload(); // Optionally refresh the page or redirect
+    });
   </script>
 </body>
 </html> 

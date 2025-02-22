@@ -142,6 +142,28 @@
         }
       });
     });
+
+    document.getElementById('opportunityForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const opportunityTitle = document.getElementById('opportunityTitle').value;
+      const opportunityDescription = document.getElementById('opportunityDescription').value;
+      const opportunityLocation = document.getElementById('opportunityLocation').value;
+      const volunteerCount = document.getElementById('volunteerCount').value;
+
+      let opportunities = JSON.parse(localStorage.getItem('volunteerOpportunities')) || [];
+      opportunities.push({
+        title: opportunityTitle,
+        description: opportunityDescription,
+        location: opportunityLocation,
+        volunteers: volunteerCount
+      });
+
+      localStorage.setItem('volunteerOpportunities', JSON.stringify(opportunities));
+
+      alert('Opportunity added successfully!');
+      window.location.reload(); // Optionally refresh the page or redirect
+    });
   </script>
 </body>
 </html> 
