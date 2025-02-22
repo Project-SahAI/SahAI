@@ -116,7 +116,11 @@
           </li>
         </ul>
       </div>
+<<<<<<< Updated upstream
       <a class="nav-link" href="/index.html">Home</a>
+=======
+      <a class="nav-link" href="#">Home</a>
+>>>>>>> Stashed changes
     </div>
   </nav>
 
@@ -146,6 +150,7 @@
 
   <div class="form-container" id="individualSignup">
     <h2>Individual Sign Up</h2>
+<<<<<<< Updated upstream
     <form>
       <label for="name">Name</label>
       <input type="text" id="name" placeholder="Name" required>
@@ -155,6 +160,16 @@
       <input type="password" id="signupPassword" placeholder="Password" required>
       <label for="confirmPassword">Confirm Password</label>
       <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+=======
+    <form action="http://localhost:8080/sahai/backend/registeration/user_registration.php" method="post">
+      <input type="text" name="individualSignupName" id="individualSignupName" placeholder="Name" required>
+      <input type="number" name="individualSignupAge" id="individualSignupAge" placeholder="Age" required>
+      <input type="phone" name="individualSignupPhone" id ="individualSignupPhone" placeholder="Phone Number" required>
+      <input type="text" name="individualSignupAddress" id="individualSignupAddress" placeholder="Address" required>
+      <input type="email" name="individualSignupEmail" id="individualSignupEmail" placeholder="Email" required>
+      <input type="password" name="individualSignupPassword" id="individualSignupPassword" placeholder="Password" required>
+      <input type="password" name="individualSignupConfirmPassword" id="individualSignupConfirmPassword" placeholder="Confirm Password" required>
+>>>>>>> Stashed changes
       <button type="submit">Sign Up</button>
       <div class="toggle-link">Already have an account? <a href="#" onclick="showForm('individualLogin')">Login</a></div>
     </form>
@@ -162,6 +177,7 @@
 
   <div class="form-container" id="ngoSignup">
     <h2>NGO Sign Up</h2>
+<<<<<<< Updated upstream
     <form>
       <label for="ngoId">NGO ID</label>
       <input type="text" id="ngoId" placeholder="NGO ID" required>
@@ -175,6 +191,16 @@
       <input type="password" id="ngoSignupPassword" placeholder="Password" required>
       <label for="ngoConfirmPassword">Confirm Password</label>
       <input type="password" id="ngoConfirmPassword" placeholder="Confirm Password" required>
+=======
+    <form action="http://localhost:8080/sahai/backend/registeration/ngo_registration.php" method="post">
+      <input type="text" name="ngoSignupName" id="ngoSignupName" placeholder="Name" required>
+      <input type="email" name="ngoSignupEmail" id="ngoSignupEmail" placeholder="Email" required>
+      <input type="text" name="ngoSignupType" id="ngoSignupType" placeholder="NGO Type" required>
+      <input type="number" name="ngoSignupPhone" id="ngoSignupPhone" placeholder="Contact Number" required>
+      <input type="text" name="ngoSignupAddress" id="ngoSignupAddress" placeholder="Address" required>
+      <input type="password" name="ngoSignupPassword" id="ngoSignupPassword" placeholder="Password" required>
+      <input type="password" name="ngoSignupConfirmPassword" id="ngoSignupConfirmPassword" placeholder="Confirm Password" required>
+>>>>>>> Stashed changes
       <button type="submit">Create NGO Account</button>
       <div class="toggle-link">Already have an account? <a href="#" onclick="showForm('ngoLogin')">Login</a></div>
     </form>
