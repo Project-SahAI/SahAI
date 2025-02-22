@@ -10,7 +10,7 @@
 <body>
   <div class="container">
     <div class="form-container">
-      <form id="individualSignupForm">
+      <form action="http://localhost:8080/sahai/backend/registeration/user_registration.php" method="post" id="individualSignupForm">
         <h2>Individual Sign Up</h2>
         <input type="text" id="individualName" placeholder="Full Name" required>
         <input type="email" id="individualEmail" placeholder="Email Address" required>
@@ -23,6 +23,7 @@
     </div>
   </div>
 
+  <!---
   <script>
     document.getElementById('individualSignupForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -31,7 +32,7 @@
       localStorage.setItem('individualName', document.getElementById('individualName').value || 'Sample Individual Name');
       window.location.href = 'individual-dashboard.html';
     });
-  </script>
+  </script> -->
 
   <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
