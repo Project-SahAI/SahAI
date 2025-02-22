@@ -122,11 +122,11 @@
 
   <div class="form-container active" id="individualLogin">
     <h2>Individual Login</h2>
-    <form onsubmit="handleIndividualLogin(event)">
-      <label for="email">Email Address</label>
-      <input type="email" id="email" placeholder="Enter your email" required>
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Enter your password" required>
+    <form action="http://localhost:8080/sahai/backend/login/user_login.php">
+      <label for="individualLoginEmail">Email Address</label>
+      <input type="email" name="individualLoginEmail" id="individualLoginEmail" placeholder="Enter your email" required>
+      <label for="individualLoginPassword">Password</label>
+      <input type="password" name="individualLoginPassword" id="individualLoginPassword" placeholder="Enter your password" required>
       <button type="submit">Login</button>
       <div class="toggle-link">Don't have an account? <a href="#" onclick="showForm('individualSignup')">Register</a></div>
     </form>
@@ -134,11 +134,11 @@
 
   <div class="form-container" id="ngoLogin">
     <h2>NGO Login</h2>
-    <form onsubmit="handleNGOLogin(event)">
-      <label for="ngoEmail">Email Address</label>
-      <input type="email" id="ngoEmail" placeholder="Enter your email" required>
-      <label for="ngoPassword">Password</label>
-      <input type="password" id="ngoPassword" placeholder="Enter your password" required>
+    <form action="http://localhost:8080/sahai/backend/login/ngo_login.php" method="post">
+      <label for="ngoLoginEmail">Email Address</label>
+      <input type="email" name="ngoLoginEmail" id="ngoLoginEmail" placeholder="Enter your email" required>
+      <label for="ngoLoginPassword">Password</label>
+      <input type="password" name="ngoLoginPassword" id="ngoLoginPassword" placeholder="Enter your password" required>
       <button type="submit">Login</button>
       <div class="toggle-link">Don't have an account? <a href="#" onclick="showForm('ngoSignup')">Register</a></div>
     </form>

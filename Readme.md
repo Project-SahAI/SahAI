@@ -17,21 +17,6 @@ SahAi is a community welfare website designed to connect individuals in need wit
 - **Authentication**: Firebase/Auth0
 - **Geolocation Services**: Google Maps API for location-based volunteer matching
 
-## Installation
-1. **Clone the repository**:
-   ```sh
-   git clone https://github.com/Project-SahAI/SahAI.git
-   cd SahAI
-   ```
-2. **Install dependencies**:
-   ```sh
-   npm install
-   ```
-3. **Run the application**:
-   ```sh
-   npm start
-   ```
-
 ## Usage
 1. **Create an Account**: Sign up as a user or NGO.
 2. **Post Requests or Offers**: Individuals post their needs, and NGOs list their programs.
