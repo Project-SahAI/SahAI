@@ -153,7 +153,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="volunteerApplicationForm" class="needs-validation" novalidate>
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
               <input type="text" class="form-control" id="name" required>
@@ -164,9 +164,11 @@
             </div>
             <div class="mb-3">
               <label for="message" class="form-label">Message</label>
-              <textarea class="form-control" id="message" rows="3" required></textarea>
+              <textarea class="form-control" id="message" rows="2" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit Application</button>
+            <div class="text-end">
+              <button type="submit" class="btn btn-primary">Submit Application</button>
+            </div>
           </form>
         </div>
       </div>
@@ -178,6 +180,8 @@
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.body.classList.toggle('dark-theme', savedTheme === 'dark');
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       const needsContainer = document.querySelector('.needs-container');
       const opportunitiesContainer = document.querySelector('.opportunities-container');
 
@@ -214,6 +218,123 @@
         </div>`;
         opportunitiesContainer.innerHTML += opportunityCard;
       });
+=======
+=======
+>>>>>>> Stashed changes
+      // Load and display community needs from database
+      async function displayCommunityNeeds() {
+        try {
+          const response = await fetch('/api/community-needs.php');
+          const needs = await response.json();
+          const container = document.getElementById('communityNeedsContainer');
+          
+          if (needs.length === 0) {
+            container.innerHTML = '<p>No community needs posted yet.</p>';
+            return;
+          }
+
+          container.innerHTML = needs.map(need => `
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">${need.title}</h5>
+                <p class="card-text">${need.description}</p>
+              </div>
+              <div class="card-footer d-flex justify-content-between align-items-center">
+                <span class="badge bg-${need.priority === 'High' ? 'danger' : 'warning'}">${need.priority} Priority</span>
+                <button class="btn btn-sm btn-outline-primary" onclick="handleUpvote(${need.id})">
+                  <i class="fas fa-thumbs-up"></i> Upvote (${need.upvotes})
+                </button>
+              </div>
+            </div>
+          `).join('');
+        } catch (error) {
+          console.error('Error fetching community needs:', error);
+        }
+      }
+
+      // Load and display volunteer opportunities from database
+      async function displayVolunteerOpportunities() {
+        try {
+          const response = await fetch('/api/volunteer-opportunities.php');
+          const opportunities = await response.json();
+          const container = document.getElementById('volunteerOpportunitiesContainer');
+          
+          if (opportunities.length === 0) {
+            container.innerHTML = '<p>No volunteer opportunities available yet.</p>';
+            return;
+          }
+
+          container.innerHTML = opportunities.map(opportunity => `
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">${opportunity.title}</h5>
+                <p class="card-text">${opportunity.description}</p>
+              </div>
+              <div class="card-footer d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-primary" 
+                        onclick="showOpportunityDetails(${opportunity.id})"
+                        data-bs-toggle="modal" 
+                        data-bs-target="#opportunityModal">
+                  <i class="fas fa-info-circle"></i> More Info
+                </button>
+              </div>
+            </div>
+          `).join('');
+        } catch (error) {
+          console.error('Error fetching volunteer opportunities:', error);
+        }
+      }
+
+      // Handle upvoting with database
+      window.handleUpvote = async function(needId) {
+        try {
+          const response = await fetch('/api/upvote.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ needId })
+          });
+          
+          if (response.ok) {
+            // Refresh the needs display
+            displayCommunityNeeds();
+          }
+        } catch (error) {
+          console.error('Error upvoting:', error);
+        }
+      };
+
+      // Show opportunity details from database
+      window.showOpportunityDetails = async function(opportunityId) {
+        try {
+          const response = await fetch(`/api/opportunity-details.php?id=${opportunityId}`);
+          const opportunity = await response.json();
+          
+          document.getElementById('opportunityModalLabel').textContent = opportunity.title;
+          const modalBody = document.querySelector('#opportunityModal .modal-body');
+          modalBody.innerHTML = `
+            <h3>${opportunity.title}</h3>
+            <p>${opportunity.description}</p>
+            <h4>Opportunity Details</h4>
+            <p>${opportunity.details}</p>
+            <p>Requirements:</p>
+            <ul>
+              ${opportunity.requirements.map(req => `<li>${req}</li>`).join('')}
+            </ul>
+          `;
+        } catch (error) {
+          console.error('Error fetching opportunity details:', error);
+        }
+      };
+
+      // Initial load
+      displayCommunityNeeds();
+      displayVolunteerOpportunities();
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     });
   </script>
 
