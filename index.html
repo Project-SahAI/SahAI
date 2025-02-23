@@ -85,6 +85,17 @@
       background-color: #2a2a2a;
       color: #b0b0b0;
     }
+    .logo .sitename {
+      transition: color 0.3s ease;
+    }
+
+    body.light-theme .logo .sitename {
+      color: #000; /* Black for light theme */
+    }
+
+    body.dark-theme .logo .sitename {
+      color: #fff; /* White for dark theme */
+    }
   </style>
 
 </head>
@@ -862,29 +873,33 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const themeToggle = document.getElementById('theme-toggle');
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      
-      document.body.classList.toggle('dark-theme', savedTheme === 'dark');
-      themeToggle.checked = savedTheme === 'dark';
+      const currentTheme = localStorage.getItem('theme') || 'light';
+
+      if (currentTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggle.checked = true;
+      } else {
+        document.body.classList.add('light-theme');
+      }
 
       themeToggle.addEventListener('change', function() {
-        const newTheme = this.checked ? 'dark' : 'light';
-        document.body.classList.toggle('dark-theme', newTheme === 'dark');
-        localStorage.setItem('theme', newTheme);
+        document.body.classList.toggle('dark-theme', this.checked);
+        document.body.classList.toggle('light-theme', !this.checked);
+        localStorage.setItem('theme', this.checked ? 'dark' : 'light');
       });
 
       // Individual Login
       document.getElementById('individualLoginForm')?.addEventListener('submit', function(e) {
         e.preventDefault();
         localStorage.setItem('individualName', 'Sample Individual Name');
-        window.location.href = '/pages/individual/individual-welcome.html';
+        window.location.href = 'pages/individual/individual-welcome.html';
       });
 
       // NGO Login
       document.getElementById('ngoLoginForm')?.addEventListener('submit', function(e) {
         e.preventDefault();
         localStorage.setItem('ngoName', 'Sample NGO Name');
-        window.location.href = '/pages/ngo/ngo-welcome.html';
+        window.location.href = 'pages/ngo/ngo-welcome.html';
       });
     });
   </script>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Auth Portal - SahAI</title>
-  <link href="http://localhost:8080/sahai/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -122,11 +122,11 @@
 
   <div class="form-container active" id="individualLogin">
     <h2>Individual Login</h2>
-    <form action="http://localhost:8080/sahai/backend/login/user_login.php">
-      <label for="individualLoginEmail">Email Address</label>
-      <input type="email" name="individualLoginEmail" id="individualLoginEmail" placeholder="Enter your email" required>
-      <label for="individualLoginPassword">Password</label>
-      <input type="password" name="individualLoginPassword" id="individualLoginPassword" placeholder="Enter your password" required>
+    <form onsubmit="handleIndividualLogin(event)">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
       <button type="submit">Login</button>
       <div class="toggle-link">Don't have an account? <a href="#" onclick="showForm('individualSignup')">Register</a></div>
     </form>
@@ -134,11 +134,11 @@
 
   <div class="form-container" id="ngoLogin">
     <h2>NGO Login</h2>
-    <form action="http://localhost:8080/sahai/backend/login/ngo_login.php" method="post">
-      <label for="ngoLoginEmail">Email Address</label>
-      <input type="email" name="ngoLoginEmail" id="ngoLoginEmail" placeholder="Enter your email" required>
-      <label for="ngoLoginPassword">Password</label>
-      <input type="password" name="ngoLoginPassword" id="ngoLoginPassword" placeholder="Enter your password" required>
+    <form onsubmit="handleNGOLogin(event)">
+      <label for="ngoEmail">Email Address</label>
+      <input type="email" id="ngoEmail" placeholder="Enter your email" required>
+      <label for="ngoPassword">Password</label>
+      <input type="password" id="ngoPassword" placeholder="Enter your password" required>
       <button type="submit">Login</button>
       <div class="toggle-link">Don't have an account? <a href="#" onclick="showForm('ngoSignup')">Register</a></div>
     </form>
@@ -147,19 +147,12 @@
   <div class="form-container" id="individualSignup">
     <h2>Individual Sign Up</h2>
     <form action="http://localhost:8080/sahai/backend/registeration/user_registration.php" method="post">
-      <label for="name">Name</label>
       <input type="text" name="individualSignupName" id="individualSignupName" placeholder="Name" required>
-      <label for="age">Age</label>
       <input type="number" name="individualSignupAge" id="individualSignupAge" placeholder="Age" required>
-      <label for="phone">Phone Number</label>
       <input type="phone" name="individualSignupPhone" id ="individualSignupPhone" placeholder="Phone Number" required>
-      <label for="address">Adress</label>
       <input type="text" name="individualSignupAddress" id="individualSignupAddress" placeholder="Address" required>
-      <label for="signupEmail">Email Address</label>
       <input type="email" name="individualSignupEmail" id="individualSignupEmail" placeholder="Email" required>
-      <label for="signupPassword">Password</label>
       <input type="password" name="individualSignupPassword" id="individualSignupPassword" placeholder="Password" required>
-      <label for="confirmPassword">Confirm Password</label>
       <input type="password" name="individualSignupConfirmPassword" id="individualSignupConfirmPassword" placeholder="Confirm Password" required>
       <button type="submit">Sign Up</button>
       <div class="toggle-link">Already have an account? <a href="#" onclick="showForm('individualLogin')">Login</a></div>
@@ -169,26 +162,19 @@
   <div class="form-container" id="ngoSignup">
     <h2>NGO Sign Up</h2>
     <form action="http://localhost:8080/sahai/backend/registeration/ngo_registration.php" method="post">
-      <label for="ngoSignupName">NGO Name</label>
       <input type="text" name="ngoSignupName" id="ngoSignupName" placeholder="Name" required>
-      <label for="ngoSignupEmail">Official Email</label>
       <input type="email" name="ngoSignupEmail" id="ngoSignupEmail" placeholder="Email" required>
-      <label for="ngoSignupType">NGO type</label>
       <input type="text" name="ngoSignupType" id="ngoSignupType" placeholder="NGO Type" required>
-      <label for="ngoSignupPhone">Contact Number</label>
       <input type="number" name="ngoSignupPhone" id="ngoSignupPhone" placeholder="Contact Number" required>
-      <label for="ngoSignupAddress">Address</label>
       <input type="text" name="ngoSignupAddress" id="ngoSignupAddress" placeholder="Address" required>
-      <label for="ngoSignupPassword">Password</label>
       <input type="password" name="ngoSignupPassword" id="ngoSignupPassword" placeholder="Password" required>
-      <label for="ngoConfirmPassword">Confirm Password</label>
       <input type="password" name="ngoSignupConfirmPassword" id="ngoSignupConfirmPassword" placeholder="Confirm Password" required>
       <button type="submit">Create NGO Account</button>
       <div class="toggle-link">Already have an account? <a href="#" onclick="showForm('ngoLogin')">Login</a></div>
     </form>
   </div>
+
   <script>
-    /*
     function handleIndividualLogin(event) {
       event.preventDefault();
       // Simulate login process
@@ -199,7 +185,7 @@
       event.preventDefault();
       // Simulate login process
       window.location.href = '/pages/ngo/ngo-welcome.html';
-    } */
+    }
 
     function showForm(formId) {
       document.querySelectorAll('.form-container').forEach(form => {
@@ -209,6 +195,6 @@
     }
   </script>
 
-  <script src="http://localhost:8080/sahai/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html> 
