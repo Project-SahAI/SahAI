@@ -179,7 +179,6 @@
     document.addEventListener('DOMContentLoaded', function() {
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.body.classList.toggle('dark-theme', savedTheme === 'dark');
-
       const needsContainer = document.querySelector('.needs-container');
       const opportunitiesContainer = document.querySelector('.opportunities-container');
 
@@ -219,7 +218,7 @@
       // Load and display community needs from database
       async function displayCommunityNeeds() {
         try {
-          const response = await fetch('/api/community-needs.php');
+          const response = await fetch('../../backend/post_presentation.php');
           const needs = await response.json();
           const container = document.getElementById('communityNeedsContainer');
           
@@ -243,14 +242,14 @@
             </div>
           `).join('');
         } catch (error) {
-          console.error('Error fetching community needs:', error);
+          console.log('Error fetching community needs:', error);
         }
       }
 
       // Load and display volunteer opportunities from database
       async function displayVolunteerOpportunities() {
         try {
-          const response = await fetch('/api/volunteer-opportunities.php');
+          const response = await fetch('../../backend/volunteer-opportunities.php');
           const opportunities = await response.json();
           const container = document.getElementById('volunteerOpportunitiesContainer');
           
@@ -276,7 +275,7 @@
             </div>
           `).join('');
         } catch (error) {
-          console.error('Error fetching volunteer opportunities:', error);
+          console.log('Error fetching volunteer opportunities:', error);
         }
       }
 
