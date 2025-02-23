@@ -1,4 +1,12 @@
-# SahAi Project
+<p align="center">
+  <svg width="100%" height="120">
+    <text x="50%" y="50%" font-size="60" fill="#39FF14" text-anchor="middle" alignment-baseline="middle" stroke="#39FF14" stroke-width="2">
+      SahAi Project
+      <animate attributeName="fill" values="#39FF14;#FF00FF;#00FFFF;#39FF14" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="stroke" values="#39FF14;#FF00FF;#00FFFF;#39FF14" dur="2s" repeatCount="indefinite"/>
+    </text>
+  </svg>
+</p>
 
 ## Overview
 SahAi is a community welfare website designed to connect individuals in need with NGOs and other users willing to help. Inspired by Reddit, the platform allows users to post their needs and wants, while NGOs can share information about their drives and programs. Local users can volunteer for these initiatives, fostering a strong and supportive community.
