@@ -32,5 +32,5 @@ Contributions are welcome! Follow these steps:
 5. Open a pull request.
 
 ## Contact
-For any issues or suggestions, please reach out to **your_email@example.com**.
+For any issues or suggestions, please reach out to the current contributors.
 
