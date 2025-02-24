@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Community Need - SahAI</title>
-  
+
   <!-- Bootstrap CSS -->
   <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  
+
   <!-- Custom CSS -->
   <style>
     body {
@@ -62,11 +62,14 @@
     <div class="row justify-content-center">
       <div class="col-md-8 need-form">
         <h2 class="form-header">Submit Community Need</h2>
-        <form id="communityNeedForm" novalidate>
+        
+        <!-- Added action and method -->
+        <form id="communityNeedForm" action="../../backend/post_creation/user_post.php" method="POST" novalidate>
+          
           <div class="row">
             <div class="col-md-12 mb-3">
               <label class="form-label required-label">Need Title</label>
-              <input type="text" class="form-control" id="needTitle" required>
+              <input type="text" class="form-control" id="postHeading" name="postHeading" required>
               <div class="invalid-feedback">Please provide a title for the need</div>
             </div>
           </div>
@@ -74,7 +77,7 @@
           <div class="row">
             <div class="col-md-12 mb-3">
               <label class="form-label required-label">Detailed Description</label>
-              <textarea class="form-control" id="needDescription" rows="4" required></textarea>
+              <textarea class="form-control" id="postDescription" name="postDescription" rows="4" required></textarea>
               <div class="invalid-feedback">Please provide a detailed description</div>
             </div>
           </div>
@@ -82,18 +85,20 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label class="form-label required-label">Location</label>
-              <input type="text" class="form-control" id="needLocation" required>
+              <input type="text" class="form-control" id="postLocation" name="postLocation" required>
               <div class="invalid-feedback">Please specify the location</div>
             </div>
             <div class="col-md-6 mb-3">
               <label class="form-label required-label">Need Category</label>
-              <select class="form-control" id="needCategory" required>
+              <select class="form-control" id="postLabel" name="postLabel" required>
                 <option value="">Select Category</option>
-                <option>Education</option>
-                <option>Healthcare</option>
-                <option>Infrastructure</option>
-                <option>Food Security</option>
-                <option>Other</option>
+                <option value="financial">Financial</option>
+                <option value="medical">Medical</option>
+                <option value="housing_needed">Housing Needed</option>
+                <option value="legal_help">Legal Help</option>
+                <option value="education">Education</option>
+                <option value="volunteer_request">Volunteer Request</option>
+                <option value="food">Food</option>
               </select>
               <div class="invalid-feedback">Please select a category</div>
             </div>
@@ -103,11 +108,12 @@
             <div class="col-md-12">
               <label class="form-label required-label">Urgency Level</label>
               <div class="urgency-level">
-                <button type="button" class="btn btn-outline-success" data-urgency="low">Low</button>
-                <button type="button" class="btn btn-outline-warning" data-urgency="medium">Medium</button>
-                <button type="button" class="btn btn-outline-danger" data-urgency="high">High</button>
+                <button type="button" class="btn btn-outline-success" data-urgency="low_priority">Low</button>
+                <button type="button" class="btn btn-outline-warning" data-urgency="moderate">Moderate</button>
+                <button type="button" class="btn btn-outline-danger" data-urgency="urgent">Urgent</button>
+                <button type="button" class="btn btn-outline-danger" data-urgency="critical">Critical</button>
               </div>
-              <input type="hidden" id="urgencyLevel" required>
+              <input type="hidden" id="postUrgency" name="postUrgency" required>
               <div class="invalid-feedback">Please select an urgency level</div>
             </div>
           </div>
@@ -115,7 +121,7 @@
           <div class="row">
             <div class="col-md-12 mb-3">
               <label class="form-label">Additional Context (Optional)</label>
-              <textarea class="form-control" id="additionalContext" rows="3"></textarea>
+              <textarea class="form-control" id="additionalContext" name="additionalContext" rows="3"></textarea>
             </div>
           </div>
 
@@ -129,67 +135,47 @@
     </div>
   </div>
 
-  <!-- Bootstrap JS -->
   <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById('communityNeedForm');
-      const urgencyButtons = document.querySelectorAll('.urgency-level .btn');
-      const urgencyInput = document.getElementById('urgencyLevel');
-      
-      // Urgency Level Selection
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("communityNeedForm");
+      const urgencyButtons = document.querySelectorAll(".urgency-level .btn");
+      const urgencyInput = document.getElementById("postUrgency");
+  
       urgencyButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          urgencyButtons.forEach(btn => btn.classList.remove('active'));
-          this.classList.add('active');
+        button.addEventListener("click", function () {
+          urgencyButtons.forEach(btn => btn.classList.remove("active"));
+          this.classList.add("active");
           urgencyInput.value = this.dataset.urgency;
-          urgencyInput.dispatchEvent(new Event('change'));
         });
       });
-      
-      // Form Validation
-      form.addEventListener('submit', function(event) {
+
+      /*form.addEventListener("submit", function (e) {
         if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        
-        form.classList.add('was-validated');
-      }, false);
-
-      // Custom validation for urgency
-      urgencyInput.addEventListener('change', function() {
-        if (this.value) {
-          this.setCustomValidity('');
+          e.preventDefault();
+          form.classList.add("was-validated");
         } else {
-          this.setCustomValidity('Please select an urgency level');
+          e.preventDefault();
+          const formData = new FormData(form);
+          
+          fetch(form.action, {
+            method: "POST",
+            body: formData
+          })
+          .then(response => response.text())
+          .then(data => {
+            console.log("Server Response:", data);
+            alert("Need added successfully!");
+            window.location.href = "../../pages/posts/success.html";
+          })
+          .catch(error => {
+            console.error("Error:", error);
+            alert("Something went wrong, please try again.");
+          });
         }
-      });
-    });
-
-    document.getElementById('communityNeedForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const needTitle = document.getElementById('needTitle').value;
-      const needDescription = document.getElementById('needDescription').value;
-      const needLocation = document.getElementById('needLocation').value;
-      const needCategory = document.getElementById('needCategory').value;
-
-      let needs = JSON.parse(localStorage.getItem('communityNeeds')) || [];
-      needs.push({
-        title: needTitle,
-        description: needDescription,
-        location: needLocation,
-        category: needCategory,
-        priority: 'Medium' // This can be dynamic based on your form
-      });
-
-      localStorage.setItem('communityNeeds', JSON.stringify(needs));
-
-      alert('Need added successfully!');
-      window.location.reload(); // Optionally refresh the page or redirect
+      });*/
     });
   </script>
 </body>
-</html> 
+</html>
