@@ -1,30 +1,12 @@
 <?php
 
-
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
-
-
-
-
-
-require '../../backend/database.php'; // Ensure correct path
-session_start(); // Start session to access session variables
+require '../../backend/database.php'; // Ensure correct database connection
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Ensure user is authenticated
-    if (!isset($_SESSION['user_id'])) {
-        echo json_encode(["error" => "Unauthorized: User not logged in."]);
-        exit;
-    }
-
-    $user_id = $_SESSION['user_id']; // Get user ID from session
 
     // Check if database connection is working
     if (!$mysqli) {
-        echo json_encode(["error" => "Database connection failed."]);
-        exit;
+        die(json_encode(["error" => "Database connection failed."]));
     }
 
     // Sanitize inputs to prevent XSS
@@ -34,11 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $postLabel = htmlspecialchars(trim($_POST['postLabel'] ?? ''));
     $postUrgency = htmlspecialchars(trim($_POST['postUrgency'] ?? ''));
     $additionalContext = htmlspecialchars(trim($_POST['additionalContext'] ?? ''));
+    $user_id = isset($_POST['user_id']) ? intval($_POST['user_id']) : 1; // Default to 1 if not provided
 
     // Validate required fields
     if (empty($postHeading) || empty($postDescription) || empty($postLocation) || empty($postLabel) || empty($postUrgency)) {
-        echo json_encode(["error" => "All required fields must be filled."]);
-        exit;
+        die(json_encode(["error" => "All required fields must be filled."]));
     }
 
     // Validate ENUM values for labels and urgency
@@ -46,42 +28,43 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $validUrgency = ['critical', 'urgent', 'moderate', 'low_priority'];
 
     if (!in_array($postLabel, $validLabels) || !in_array($postUrgency, $validUrgency)) {
-        echo json_encode(["error" => "Invalid label or urgency value."]);
-        exit;
+        die(json_encode(["error" => "Invalid label or urgency value."]));
     }
-    
-    
-    
-    
-    // Prepare SQL statement
-    $sql = "INSERT INTO User_Posts (user_id, heading, description, location, labels, urgency, additional_context, created_at) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
 
-    // Debug Step: Check SQL before preparing
-    echo "DEBUG: Preparing SQL Statement...<br>";
+    // Check if user_id exists in individual_users table
+    $userCheckSql = "SELECT user_id FROM individual_users WHERE user_id = ?";
+    if ($userCheckStmt = $mysqli->prepare($userCheckSql)) {
+        $userCheckStmt->bind_param("i", $user_id);
+        $userCheckStmt->execute();
+        $userCheckStmt->store_result();
+
+        if ($userCheckStmt->num_rows === 0) {
+            die(json_encode(["error" => "Invalid user_id: $user_id does not exist."]));
+        }
+        $userCheckStmt->close();
+    }
+
+    // Prepare SQL statement (Include user_id)
+    $sql = "INSERT INTO User_Posts (user_id, heading, description, location, labels, urgency, additional_context, created_at) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
 
     if ($stmt = $mysqli->prepare($sql)) {
-    echo "DEBUG: SQL Statement Prepared Successfully.<br>";
+        // Bind parameters, including user_id (integer)
+        $stmt->bind_param("issssss", $user_id, $postHeading, $postDescription, $postLocation, $postLabel, $postUrgency, $additionalContext);
 
-    // Debug Step: Check data before inserting
-    echo "DEBUG: Data to be inserted - User ID: $user_id, Heading: $postHeading, Description: $postDescription, Location: $postLocation, Label: $postLabel, Urgency: $postUrgency, Additional Context: $additionalContext <br>";
+        if ($stmt->execute()) {
+            echo json_encode(["success" => "Need added successfully!"]);
+        } else {
+            echo json_encode(["error" => "Database error: " . $stmt->error]);
+        }
 
-    $stmt->bind_param("issssss", $user_id, $postHeading, $postDescription, $postLocation, $postLabel, $postUrgency, $additionalContext);
-
-    if ($stmt->execute()) {
-    echo json_encode(["success" => "Need added successfully!"]);
+        $stmt->close();
     } else {
-    echo json_encode(["error" => "Database error: " . $stmt->error]);
+        echo json_encode(["error" => "Failed to prepare SQL statement. MySQL Error: " . $mysqli->error]);
     }
-    $stmt->close();
-    } else {
-    echo json_encode(["error" => "Failed to prepare SQL statement. MySQL Error: " . $mysqli->error]);
-    }
-
 
     $mysqli->close();
-    } else {
+} else {
     echo json_encode(["error" => "Invalid request method."]);
 }
-
 
