@@ -121,20 +121,41 @@
   </nav>
 
   <div class="form-container active" id="individualLogin">
+    <div id="error-message" style="color: red; margin-top: 10px;"></div>
     <h2>Individual Login</h2>
     <form onsubmit="handleIndividualLogin(event)">
       <label for="email">Email Address</label>
-      <input type="email" id="email" placeholder="Enter your email" required>
+      <input type="email" name="individualLoginEmail" id="individualLoginEmail" placeholder="Enter your email" required>
       <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Enter your password" required>
+      <input type="password" name="individualLoginPassword" id="individualLoginPassword" placeholder="Enter your password" required>
       <button type="submit">Login</button>
       <div class="toggle-link">Don't have an account? <a href="#" onclick="showForm('individualSignup')">Register</a></div>
     </form>
+    <script>
+      async function loginUser(event) {
+        event.preventDefault(); // Prevent form reload
+        
+        let formData = new FormData(document.querySelector("#loginForm")); // Fix form ID
+    
+        let response = await fetch("../../backend/login/user_login.php", {
+            method: "POST",
+            body: formData
+        });
+    
+        let result = await response.json(); // Expecting JSON response
+    
+        if (result.success) {
+            window.location.href = "individual-welcome.html"; // Redirect on success
+        } else {
+            document.getElementById("error-message").innerText = result.error;
+        }
+      }
+    </script>
   </div>
 
   <div class="form-container" id="ngoLogin">
     <h2>NGO Login</h2>
-    <form onsubmit="handleNGOLogin(event)">
+    <form >
       <label for="ngoEmail">Email Address</label>
       <input type="email" id="ngoEmail" placeholder="Enter your email" required>
       <label for="ngoPassword">Password</label>
@@ -146,7 +167,7 @@
 
   <div class="form-container" id="individualSignup">
     <h2>Individual Sign Up</h2>
-    <form action="http://localhost:8080/sahai/backend/registeration/user_registration.php" method="post">
+    <form action="../../backend/registeration/user_registration.php" method="post">
       <input type="text" name="individualSignupName" id="individualSignupName" placeholder="Name" required>
       <input type="number" name="individualSignupAge" id="individualSignupAge" placeholder="Age" required>
       <input type="phone" name="individualSignupPhone" id ="individualSignupPhone" placeholder="Phone Number" required>
@@ -161,7 +182,7 @@
 
   <div class="form-container" id="ngoSignup">
     <h2>NGO Sign Up</h2>
-    <form action="http://localhost:8080/sahai/backend/registeration/ngo_registration.php" method="post">
+    <form action="../../backend/registeration/ngo_registration.php" method="post">
       <input type="text" name="ngoSignupName" id="ngoSignupName" placeholder="Name" required>
       <input type="email" name="ngoSignupEmail" id="ngoSignupEmail" placeholder="Email" required>
       <input type="text" name="ngoSignupType" id="ngoSignupType" placeholder="NGO Type" required>
@@ -175,12 +196,6 @@
   </div>
 
   <script>
-    function handleIndividualLogin(event) {
-      event.preventDefault();
-      // Simulate login process
-      window.location.href = '../individual/individual-welcome.html';
-    }
-
     function handleNGOLogin(event) {
       event.preventDefault();
       // Simulate login process
@@ -193,6 +208,7 @@
       });
       document.getElementById(formId).classList.add('active');
     }
+
   </script>
 
   <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
