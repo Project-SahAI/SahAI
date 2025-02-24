@@ -55,7 +55,7 @@ $stmt->bind_param("sssssss",
 if ($stmt->execute()) {
 
     //print_r("Awesome... the sql went through");
-    header("Location: http://localhost:8080/SahAI/pages/auth/auth-portal.html");
+    header("Location: ../../pages/auth/auth-portal.html");
     exit;
     
 } else {
