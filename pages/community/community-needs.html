@@ -179,9 +179,6 @@
     document.addEventListener('DOMContentLoaded', function() {
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.body.classList.toggle('dark-theme', savedTheme === 'dark');
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
       const needsContainer = document.querySelector('.needs-container');
       const opportunitiesContainer = document.querySelector('.opportunities-container');
 
@@ -218,9 +215,6 @@
         </div>`;
         opportunitiesContainer.innerHTML += opportunityCard;
       });
-=======
-=======
->>>>>>> Stashed changes
       // Load and display community needs from database
       async function displayCommunityNeeds() {
         try {
@@ -331,10 +325,6 @@
       // Initial load
       displayCommunityNeeds();
       displayVolunteerOpportunities();
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     });
   </script>
 

@@ -9,8 +9,8 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="/assets/SahiAI Logo.jpg" rel="icon">
+  <link href="/assets/SahiAI Logo.jpg" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -46,6 +46,10 @@
     body.dark-theme {
       background-color: #121212;
       color: #e0e0e0;
+    }
+    body.light-theme {
+      background-color: #f5f5dc;
+      color: #333;
     }
     .faq-section {
       margin: 50px auto;
@@ -95,6 +99,54 @@
 
     body.dark-theme .logo .sitename {
       color: #fff; /* White for dark theme */
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none; /* Removes underline from links */
+    }
+    .logo-img {
+      height: 40px; /* Adjust size as needed */
+      width: auto;
+      margin-right: 10px; /* Space between logo and divider */
+    }
+    .divider {
+      margin: 0 10px; /* Space around the divider */
+      color: #fff; /* Adjust color as needed */
+      font-size: 24px; /* Adjust size as needed */
+    }
+    .sitename {
+      color: #fff; /* Adjust color as needed */
+      font-size: 20px; /* Adjust size as needed */
+      font-weight: bold;
+    }
+    .team .member img {
+      height: 300px; /* Fixed height for all images */
+      width: 100%; /* Responsive width */
+      object-fit: cover; /* Cover the frame without stretching the image */
+      border-radius: 20%; /* Optional: makes the images circular */
+    }
+    .team .member {
+      text-align: center; /* Center-align the text */
+      margin-bottom: 20px; /* Space between rows */
+    }
+    .team .member h4 {
+      margin-top: 10px; /* Space between image and name */
+      color: #0ea2bd; /* Theme color for names */
+    }
+    .team .member span {
+      color: #6c757d; /* Subtitle color */
+    }
+    @media (max-width: 768px) {
+      .logo-img {
+        height: 30px; /* Smaller logo on mobile */
+      }
+      .divider {
+        margin: 0 5px; /* Less space on mobile */
+        font-size: 20px; /* Smaller divider on mobile */
+      }
+      .sitename {
+        font-size: 18px; /* Smaller text on mobile */
+      }
     }
   </style>
 
@@ -105,6 +157,8 @@
   <header id="header" class="header fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/SahiAI Logo.jpg" alt="SahAI Logo" class="logo-img">
+        <span class="divider">|</span>
         <h1 class="sitename m-0">SahAI</h1>
       </a>
 
@@ -265,7 +319,7 @@
         <div class="row gy-4">
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <h3>Empowering communities through collaboration</h3>
-            <img src="assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt="">
+            <img src="assets/img/about-us.jpg" class="img-fluid rounded-4 mb-4" alt="">
             <p>Our mission is to foster collaboration among individuals, organizations, 
               and communities to address critical challenges and create sustainable solutions. 
               By bringing together resources and expertise, we aim to amplify the impact of every contribution, no matter how small. 
@@ -286,8 +340,8 @@
               </p>
 
               <div class="position-relative mt-4">
-                <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt="">
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
+                <img src="assets/img/about-us2.jpeg" class="img-fluid rounded-4" alt="">
+                <a href="https://youtu.be/2szQhR4oZtA?si=C2FfS3ZdiXDCio4J" class="glightbox pulsating-play-btn"></a>
               </div>
             </div>
           </div>
@@ -317,7 +371,7 @@
               </div>
               <h3>Healthcare for All</h3>
               <p>We provide essential healthcare services, awareness programs, and wellness initiatives to improve the quality of life for underprivileged communities.</p>
-              <a href="service-details.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+              <!-- <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a> -->
             </div>
           </div><!-- End Service Item -->
 
@@ -328,7 +382,7 @@
               </div>
               <h3>Empowering Through Education</h3>
               <p>Our programs focus on providing quality education and resources to children and adults, bridging the gap for a brighter future.</p>
-              <a href="service-details.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+              <!-- <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a> -->
             </div>
           </div><!-- End Service Item -->
 
@@ -339,7 +393,7 @@
               </div>
               <h3>Strengthening Communities</h3>
               <p>From infrastructure projects to skill-building workshops, we aim to foster sustainable community growth.</p>
-              <a href="service-details.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+              <!-- <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a> -->
             </div>
           </div><!-- End Service Item -->
 
@@ -350,7 +404,7 @@
               </div>
               <h3>Volunteer Opportunities</h3>
               <p>Collaborate with us as a volunteer to create a meaningful impact in areas ranging from education to environmental conservation.</p>
-              <a href="service-details.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+              <!-- <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a> -->
             </div>
           </div><!-- End Service Item -->
 
@@ -361,7 +415,7 @@
               </div>
               <h3>Immediate Aid and Support</h3>
               <p>Our rapid response teams provide essential relief and resources to those affected by natural disasters and emergencies.</p>
-              <a href="service-details.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+              <!-- <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a> -->
             </div>
           </div><!-- End Service Item -->
 
@@ -372,7 +426,7 @@
               </div>
               <h3>Caring for the Planet</h3>
               <p>We drive environmental awareness and sustainability projects, promoting a greener, cleaner world for future generations.</p>
-              <a href="service-details.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+              <!-- <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a> -->
             </div>
           </div><!-- End Service Item -->
 
@@ -383,7 +437,7 @@
     </section><!-- /Services Section -->
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section">
+    <!-- <section id="testimonials" class="testimonials section">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
           <h2>Testimonials</h2>
@@ -391,9 +445,9 @@
         </div>
 
         <div class="testimonial-wrapper">
-          <div class="testimonial-container">
+          <div class="testimonial-container"> -->
             <!-- Testimonial 1 -->
-            <div class="testimonial-item">
+            <!-- <div class="testimonial-item">
               <div class="testimonial-header">
                 <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
                 <div class="testimonial-info">
@@ -404,10 +458,10 @@
               <div class="testimonial-content">
                 <p>Working with SahAI has been an incredible experience. The platform made it easy to find meaningful volunteer opportunities.</p>
               </div>
-            </div>
+            </div> -->
 
             <!-- Testimonial 2 -->
-            <div class="testimonial-item">
+            <!-- <div class="testimonial-item">
               <div class="testimonial-header">
                 <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
                 <div class="testimonial-info">
@@ -418,10 +472,10 @@
               <div class="testimonial-content">
                 <p>SahAI has transformed how we manage our volunteer programs. Their platform's efficiency is remarkable.</p>
               </div>
-            </div>
+            </div> -->
 
             <!-- Testimonial 3 -->
-            <div class="testimonial-item">
+            <!-- <div class="testimonial-item">
               <div class="testimonial-header">
                 <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
                 <div class="testimonial-info">
@@ -432,10 +486,10 @@
               <div class="testimonial-content">
                 <p>The support and resources provided by SahAI have been instrumental in bringing positive change.</p>
               </div>
-            </div>
+            </div> -->
 
             <!-- Testimonial 4 -->
-            <div class="testimonial-item">
+            <!-- <div class="testimonial-item">
               <div class="testimonial-header">
                 <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
                 <div class="testimonial-info">
@@ -446,10 +500,10 @@
               <div class="testimonial-content">
                 <p>The collaborative environment fostered by SahAI has led to amazing community initiatives.</p>
               </div>
-            </div>
+            </div> -->
 
             <!-- Testimonial 5 -->
-            <div class="testimonial-item">
+            <!-- <div class="testimonial-item">
               <div class="testimonial-header">
                 <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
                 <div class="testimonial-info">
@@ -464,82 +518,76 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
-    <!-- Team Section -->
+    <!-- Our Team Section -->
     <section id="team" class="team section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Our Team</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
       <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="section-title">Our Team</h2>
+        <div class="row">
+          <!-- Team Member 1 -->
+          <div class="col-lg-3 col-md-6">
             <div class="member">
-              <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-              <h4>Walter White</h4>
-              <span>Web Development</span>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter-x"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
+              <img src="/assets/img/team/team-1.jpg" class="img-fluid" alt="Team Member">
+              <h4>Aryan Srivastava</h4>
+              <span>Frontend Lead & Website Deigning</span>
             </div>
-          </div><!-- End Team Member -->
-
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+          </div>
+          <!-- Additional team members -->
+          <div class="col-lg-3 col-md-6">
             <div class="member">
-              <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-              <h4>Sarah Jhinson</h4>
-              <span>Marketing</span>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter-x"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
+              <img src="/assets/img/team/team-2.jpg" class="img-fluid" alt="Team Member">
+              <h4>Soumyodeep Nayak</h4>
+              <span>Backend & Database Management</span>
             </div>
-          </div><!-- End Team Member -->
-
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
+          </div>
+          <!-- Repeat for other members -->
+          <div class="col-lg-3 col-md-6">
             <div class="member">
-              <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-              <h4>William Anderson</h4>
-              <span>Content</span>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter-x"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
+              <img src="/assets/img/team/team-3.jpg" class="img-fluid" alt="Team Member">
+              <h4>Manav Alok Acharya</h4>
+              <span>Backend & GitHub Repo Management</span>
             </div>
-          </div><!-- End Team Member -->
-
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
+          </div>
+          <div class="col-lg-3 col-md-6">
             <div class="member">
-              <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-              <h4>Amanda Jepson</h4>
-              <span>Accountant</span>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter-x"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
+              <img src="/assets/img/team/team-4.jpg" class="img-fluid" alt="Team Member">
+              <h4>Saachi Duggal</h4>
+              <span>Backend Development & Documentation</span>
             </div>
-          </div><!-- End Team Member -->
-
+          </div>
+          <!-- Second row -->
+          <div class="col-lg-3 col-md-6">
+            <div class="member">
+              <img src="/assets/img/team/team-5.jpg" class="img-fluid" alt="Team Member">
+              <h4>Megha Shruti</h4>
+              <span>Beta Testing & Documentation</span>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="member">
+              <img src="assets/img/team/team-6.jpg" class="img-fluid" alt="Team Member">
+              <h4>Kumar Snehanshu</h4>
+              <span>Presentation</span>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="member">
+              <img src="assets/img/team/team-7.jpg" class="img-fluid" alt="Team Member">
+              <h4>Khushi Desai</h4>
+              <span>Weekly Report</span>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="member">
+              <img src="assets/img/team/team-8.jpg" class="img-fluid" alt="Team Member">
+              <h4>Soutrik Dana</h4>
+              <span>Presentation</span>
+            </div>
+          </div>
         </div>
-
       </div>
-
-    </section><!-- /Team Section -->
+    </section>
 
     <!-- FAQ Section -->
     <section id="faq" class="faq section">
@@ -617,19 +665,19 @@
             <article>
 
               <div class="post-img">
-                <img src="assets/img/blog/social-impact.jpg" alt="Social Impact" class="img-fluid">
+                <img src="assets/img/blog/blog-index1.avif" alt="Social Impact" class="img-fluid">
               </div>
 
               <p class="post-category">Social Impact</p>
 
               <h2 class="title">
-                <a href="blog-details.html">Creating Meaningful Change in Communities</a>
+                <a href="#">Creating Meaningful Change in Communities</a>
               </h2>
 
               <div class="d-flex align-items-center">
-                <img src="assets/img/blog/author1.jpg" alt="Author" class="img-fluid post-author-img flex-shrink-0">
+                <img src="assets/img/team/team-1.jpg" alt="Author" class="img-fluid post-author-img flex-shrink-0">
                 <div class="post-meta">
-                  <p class="post-author">Jane Doe</p>
+                  <p class="post-author">Aryan</p>
                   <p class="post-date">
                     <time datetime="2023-10-01">Oct 1, 2023</time>
                   </p>
@@ -643,19 +691,19 @@
             <article>
 
               <div class="post-img">
-                <img src="assets/img/blog/volunteering.jpg" alt="Volunteering" class="img-fluid">
+                <img src="/assets/img/blog/blog-index2.jpeg" alt="Volunteering" class="img-fluid">
               </div>
 
               <p class="post-category">Volunteering</p>
 
               <h2 class="title">
-                <a href="blog-details.html">The Power of Volunteerism: Stories from the Field</a>
+                <a href="#">The Power of Volunteerism: Stories from the Field</a>
               </h2>
 
               <div class="d-flex align-items-center">
-                <img src="assets/img/blog/author2.jpg" alt="Author" class="img-fluid post-author-img flex-shrink-0">
+                <img src="assets/img/team/team-4.jpg" alt="Author" class="img-fluid post-author-img flex-shrink-0">
                 <div class="post-meta">
-                  <p class="post-author">John Smith</p>
+                  <p class="post-author">Saachi Duggal</p>
                   <p class="post-date">
                     <time datetime="2023-09-15">Sep 15, 2023</time>
                   </p>
@@ -669,19 +717,19 @@
             <article>
 
               <div class="post-img">
-                <img src="assets/img/blog/innovation.jpg" alt="Innovation" class="img-fluid">
+                <img src="/assets/img/blog/blog-index3.jpg" alt="Innovation" class="img-fluid">
               </div>
 
               <p class="post-category">Innovation</p>
 
               <h2 class="title">
-                <a href="blog-details.html">Innovative Solutions for Global Challenges</a>
+                <a href="#">Innovative Solutions for Global Challenges</a>
               </h2>
 
               <div class="d-flex align-items-center">
-                <img src="assets/img/blog/author3.jpg" alt="Author" class="img-fluid post-author-img flex-shrink-0">
+                <img src="assets/img/team/team-3.jpg" alt="Author" class="img-fluid post-author-img flex-shrink-0">
                 <div class="post-meta">
-                  <p class="post-author">Emily Johnson</p>
+                  <p class="post-author">Manav Alok Acharya</p>
                   <p class="post-date">
                     <time datetime="2023-08-30">Aug 30, 2023</time>
                   </p>
@@ -703,7 +751,6 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Contact</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -716,7 +763,7 @@
                 <i class="bi bi-geo-alt flex-shrink-0"></i>
                 <div>
                   <h3>Address</h3>
-                  <p>A108 Adam Street, New York, NY 535022</p>
+                  <p>VIT Bhopal University, Bhopal, MP</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -724,7 +771,7 @@
                 <i class="bi bi-telephone flex-shrink-0"></i>
                 <div>
                   <h3>Call Us</h3>
-                  <p>+1 5589 55488 55</p>
+                  <p>+91 9999999999</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -794,7 +841,9 @@
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
           <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">SahAI</span>
+            <img src="assets/SahiAI Logo.jpg" alt="SahiAI Logo" class="logo-img">
+            <span class="divider">|</span>
+            <h1 class="sitename m-0">SahAI</h1>
           </a>
           <p>Bridging hearts and hands to build stronger communities, one act of kindness at a time.</p>
           <div class="social-links d-flex mt-4">
@@ -828,10 +877,9 @@
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
-          <p>A108 Adam Street</p>
-          <p>New York, NY 535022</p>
-          <p>United States</p>
-          <p class="mt-4"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+          <p>VIT Bhopal University</p>
+          <p>Bhopal, MP</p>
+          <p class="mt-4"><strong>Phone:</strong> <span>+91 9999999999</span></p>
           <p><strong>Email:</strong> <span>info@example.com</span></p>
         </div>
 
@@ -839,13 +887,8 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Impact</strong> <span>All Rights Reserved</span></p>
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">SahAI</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
       </div>
     </div>
 
@@ -906,4 +949,4 @@
 
 </body>
 
-</html>
+</html></html>
