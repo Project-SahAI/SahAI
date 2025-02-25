@@ -45,15 +45,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Prepare SQL statement (Include user_id)
-    $sql = "INSERT INTO User_Posts (user_id, heading, description, location, labels, urgency, additional_context, created_at) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
+    $sql = "INSERT INTO User_Posts (user_id, heading, description, location, labels, urgency, additional_context) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     if ($stmt = $mysqli->prepare($sql)) {
         // Bind parameters, including user_id (integer)
         $stmt->bind_param("issssss", $user_id, $postHeading, $postDescription, $postLocation, $postLabel, $postUrgency, $additionalContext);
 
         if ($stmt->execute()) {
-            echo json_encode(["success" => "Need added successfully!"]);
+            header("Location:../../pages/community/community-needs.html");
         } else {
             echo json_encode(["error" => "Database error: " . $stmt->error]);
         }
